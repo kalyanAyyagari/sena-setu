@@ -1,0 +1,47 @@
+<div class="home-container">
+  <h1 class="main-title">Hierarchical Item Management</h1>
+
+  <div class="sections-container">
+    <!-- Add Section -->
+    <div class="section">
+      <h2>Add Items</h2>
+      <mat-grid-list cols="2" rowHeight="2:1" gutterSize="16px">
+        <mat-grid-tile *ngFor="let item of entityTypes">
+          <mat-card class="entity-card" (click)="navigateTo('add', item.type)">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>{{item.icon}}</mat-icon>
+              <mat-card-title>{{item.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Add a new {{item.name.toLowerCase()}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button color="primary">ADD</button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+    <!-- View Section -->
+    <div class="section">
+      <h2>View Items</h2>
+      <mat-grid-list cols="2" rowHeight="2:1" gutterSize="16px">
+        <mat-grid-tile *ngFor="let item of entityTypes">
+          <mat-card class="entity-card" (click)="navigateTo('view', item.type)">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>{{item.icon}}</mat-icon>
+              <mat-card-title>{{item.name}}s</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>View all {{item.name.toLowerCase()}}s</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button color="accent">VIEW</button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>
