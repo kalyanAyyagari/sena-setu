@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +22,11 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder,) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar) {
     this.loginForm = this.fb.group({
       name: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -29,23 +36,24 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.invalid) return;
 
-    // this.apiService.login(this.loginForm.value).subscribe({
-    //   next: (response) => {
-    //     this.storageService.setToken(response.token);
-    //     this.storageService.setUser(response.user);
-    //     this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
-    //     this.router.navigate(['/home']);
-    //   },
-    //   error: (error) => {
-    //     let errorMessage = 'An error occurred during login';
-    //     if (error.error?.message) {
-    //       errorMessage = error.error.message;
-    //     }
-    //     this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
-    //   },
-    //   complete: () => {
-    //     this.isSubmitting = false;
-    //   }
-    // });
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.authService.setToken(response.token);
+        // this.authService.setUser(response.user);
+        this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        let errorMessage = 'An error occurred during login';
+        if (error.error?.message) {
+          errorMessage = error.error.message;
+        }
+        this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
+      },
+      complete: () => {
+        
+      }
+    });
   }
 }

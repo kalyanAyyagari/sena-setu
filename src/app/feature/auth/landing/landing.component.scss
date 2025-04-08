@@ -1,0 +1,10 @@
+.auth-card {
+  width: 60%;
+  height: 24rem;
+}
+
+:host ::ng-deep {
+  .mat-mdc-tab-body {
+    min-height: 17rem;
+  }
+}

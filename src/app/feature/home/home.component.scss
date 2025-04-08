@@ -28,6 +28,7 @@ h2 {
   height: 100%;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
 }
 
 .entity-card:hover {
