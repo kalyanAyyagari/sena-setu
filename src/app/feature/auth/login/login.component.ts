@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -22,11 +22,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  returnUrl: string;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute) {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/units';
     this.loginForm = this.fb.group({
       name: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -43,10 +46,12 @@ export class LoginComponent {
         this.authService.setToken(response);
         // this.authService.setUser(response.user);
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
-        this.router.navigate(['/units']);
+        this.router.navigateByUrl(this.returnUrl);
       },
       error: (error) => {
         let errorMessage = 'An error occurred during login';
+        console.log(error);
+
         if (error.error?.message) {
           errorMessage = error.error.message;
         }
