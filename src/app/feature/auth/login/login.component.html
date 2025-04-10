@@ -3,7 +3,7 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex-column">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Name</mat-label>
-      <input matInput formControlName="name" required>
+      <input aria-label="Name" matInput formControlName="name" required>
       <mat-error *ngIf="loginForm.get('name')?.hasError('required')">
         Name is required
       </mat-error>
@@ -11,7 +11,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" required>
+      <input aria-label="password" matInput type="password" formControlName="password" required>
       <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
         Password is required
       </mat-error>

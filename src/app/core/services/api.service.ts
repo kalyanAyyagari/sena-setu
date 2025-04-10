@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { Unit } from '../models/helperModals';
 // import { User } from '../models/user.model';
 // import { Unit } from '../models/unit.model';
 // import { Company } from '../models/company.model';
@@ -36,25 +37,25 @@ export class ApiService {
   }
 
   // Unit CRUD operations
-  // getUnits(): Observable<Unit[]> {
-  //   return this.http.get<Unit[]>(`${this.apiUrl}/units`);
-  // }
+  getAllUnits(): Observable<Unit[]> {
+    return this.http.get<Unit[]>(`${this.apiUrl}/units/getAll`);
+  }
 
-  // getUnit(id: string): Observable<Unit> {
-  //   return this.http.get<Unit>(`${this.apiUrl}/units/${id}`);
-  // }
+  getUnit(id: string): Observable<Unit> {
+    return this.http.get<Unit>(`${this.apiUrl}/units/${id}`);
+  }
 
-  // createUnit(unit: Partial<Unit>): Observable<Unit> {
-  //   return this.http.post<Unit>(`${this.apiUrl}/units`, unit);
-  // }
+  createUnit(unit: Partial<Unit>): Observable<Unit> {
+    return this.http.post<Unit>(`${this.apiUrl}/units`, unit);
+  }
 
-  // updateUnit(id: string, unit: Partial<Unit>): Observable<Unit> {
-  //   return this.http.put<Unit>(`${this.apiUrl}/units/${id}`, unit);
-  // }
+  updateUnit(id: string, unit: Partial<Unit>): Observable<Unit> {
+    return this.http.put<Unit>(`${this.apiUrl}/units/${id}`, unit);
+  }
 
-  // deleteUnit(id: string): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/units/${id}`);
-  // }
+  deleteUnit(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/units/${id}`);
+  }
 
   // // Company CRUD operations
   // getCompanies(unitId?: string): Observable<Company[]> {

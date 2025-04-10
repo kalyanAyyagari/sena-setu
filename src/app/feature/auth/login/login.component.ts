@@ -39,10 +39,11 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         console.log(response);
-        this.authService.setToken(response.token);
+        debugger
+        this.authService.setToken(response);
         // this.authService.setUser(response.user);
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/units']);
       },
       error: (error) => {
         let errorMessage = 'An error occurred during login';
