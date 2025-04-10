@@ -1,26 +1,31 @@
 <div class="p-1">
   <div>
-    <button mat-raised-button color="primary">
-      ADD Unit
+    <button mat-raised-button color="primary" (click)="addToggle.set(!addToggle())" >
+      {{addToggle()?'ADD Unit':'View Units'}}
     </button>
     <input matInput type="search" placeholder="Search" class="search-input" />
   </div>
-  <div>
-      <div>
-        <mat-card class="entity-card">
-          <mat-card-header>
-            <mat-icon mat-card-avatar>person</mat-icon>
-            <mat-card-title>UNIT NAME</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Unit Name: test Unit </p>
-            <p>Unit Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. At natus, saepe eum explicabo, maiores suscipit iusto facilis soluta expedita ipsum dolorum. Exercitationem nesciunt aperiam excepturi explicabo nisi assumenda, similique sapiente! </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button color="primary" >Edit</button>
-            <button mat-button color="warn" >Delete</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-  </div>
+  @if (!addToggle()) {
+    <div>
+        <div>
+          <mat-card class="entity-card">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>person</mat-icon>
+              <mat-card-title>UNIT NAME</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Unit Name: test Unit </p>
+              <p>Unit Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. At natus, saepe eum explicabo, maiores suscipit iusto facilis soluta expedita ipsum dolorum. Exercitationem nesciunt aperiam excepturi explicabo nisi assumenda, similique sapiente! </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button color="primary" >Edit</button>
+              <button mat-button color="warn" >Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+    </div>
+  }
+  @else {
+    <app-add-unit></app-add-unit>
+  }
 </div>

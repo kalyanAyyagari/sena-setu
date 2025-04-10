@@ -4,11 +4,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../../core/services/api.service';
+import { AddUnitComponent } from "../add-unit/add-unit.component";
 
 @Component({
   selector: 'app-view-units',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, MatInputModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, MatInputModule, AddUnitComponent],
   templateUrl: './view-units.component.html',
   styleUrl: './view-units.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -16,6 +17,7 @@ import { ApiService } from '../../../core/services/api.service';
 export class ViewUnitsComponent {
   unitId: string | null = null; // Initialize unitId as null
   units = signal([]);
+  addToggle = signal(false);
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
