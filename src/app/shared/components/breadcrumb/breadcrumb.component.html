@@ -1,0 +1,28 @@
+<!-- <div class="breadcrumb-container">
+  <mat-chip-set>
+    @for (item of breadcrumbs; track $index; let last= $last) {
+    <mat-chip [routerLink]="item.url" [disabled]="last" [class.active]="last">
+      {{ item.label }}
+    </mat-chip>
+    @if (!last) {
+      <mat-icon aria-hidden="true">chevron_right</mat-icon>
+    }
+    }
+  </mat-chip-set>
+</div> -->
+
+<mat-toolbar color="primary">
+  @for (breadcrumb of breadcrumbs; track $index; let last= $last) {
+    @if (!last) {
+      <a [routerLink]="breadcrumb.url" mat-button class="breadcrumb-link">
+        {{ breadcrumb.label }}
+      </a>
+      <span>></span>
+    }
+    @else {
+      <span class="breadcrumb-current">
+        {{ breadcrumb.label }}
+      </span>
+    }
+  }
+</mat-toolbar>

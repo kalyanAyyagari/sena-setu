@@ -52,7 +52,7 @@ export class LoginComponent {
         this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
       },
       complete: () => {
-        
+
       }
     });
   }

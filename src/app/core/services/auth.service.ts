@@ -1,6 +1,6 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,13 +12,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
   private apiUrl = 'http://localhost:8080';
   signup(credentials: { email: string, password: string }): Observable<any> {
-    // Replace '/api/auth/login' with your actual login endpoint.
-    return this.http.post<any>(`${this.apiUrl}/signup`, credentials);
+    return this.http.post<any>(`${this.apiUrl}/auth/signup`, credentials);
   }
 
   login(credentials: { email: string, password: string }): Observable<any> {
-    // Replace '/api/auth/login' with your actual login endpoint.
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials);
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, credentials,{responseType: "text" as 'json'});
   }
   // Retrieve the JWT token.
   getToken(): string | null {
