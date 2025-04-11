@@ -1,29 +1,14 @@
-.breadcrumb-container {
-  padding: 10px 16px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  margin-bottom: 16px;
-}
-mat-chip {
-  cursor: pointer;
-}
-mat-chip.active {
-  background-color: #e0e0e0;
-}
-mat-icon {
-  font-size: 18px;
-  height: 18px;
-  width: 18px;
-  margin: 0 4px;
-}
-
 .breadcrumb-link {
   text-decoration: none;
-  color: blue; /* Adjust according to your theme */
+  color: blue;
+  font-size: 1rem;
+  font-family: monospace;
 }
 
 .breadcrumb-current {
-  font-weight: bold;
-  color: grey; /* Adjust according to your theme */
+  text-decoration: none;
+  color: grey;
+  font-size: 1rem;
+  font-family: monospace;
+  /* Adjust according to your theme */
 }
-

@@ -17,44 +17,25 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  // Authentication endpoints
-  // signup(userData: Partial<User>): Observable<{token: string, user: User}> {
-  //   return this.http.post<{token: string, user: User}>(`${this.apiUrl}/signup`, userData);
-  // }
-
-  signup(credentials: { email: string, password: string }): Observable<any> {
-    // Replace '/api/auth/login' with your actual login endpoint.
-    return this.http.post<any>(`${this.apiUrl}/signup`, credentials);
-  }
-  // login(credentials: {email: string, password: string}): Observable<{token: string, user: User}> {
-  //   return this.http.post<{token: string, user: User}>(`${this.apiUrl}/login`, credentials);
-  // }
-
-    // Login method that calls the backend login endpoint.
-  login(credentials: { email: string, password: string }): Observable<any> {
-    // Replace '/api/auth/login' with your actual login endpoint.
-    return this.http.post<any>(`${this.apiUrl}/signup`, credentials);
-  }
-
   // Unit CRUD operations
   getAllUnits(): Observable<Unit[]> {
     return this.http.get<Unit[]>(`${this.apiUrl}/units/getAll`);
   }
 
   getUnit(id: string): Observable<Unit> {
-    return this.http.get<Unit>(`${this.apiUrl}/units/${id}`);
+    return this.http.get<Unit>(`${this.apiUrl}/units/get/${id}`);
   }
 
   createUnit(unit: Partial<Unit>): Observable<Unit> {
-    return this.http.post<Unit>(`${this.apiUrl}/units`, unit);
+    return this.http.post<Unit>(`${this.apiUrl}/units/create`, unit);
   }
 
   updateUnit(id: string, unit: Partial<Unit>): Observable<Unit> {
-    return this.http.put<Unit>(`${this.apiUrl}/units/${id}`, unit);
+    return this.http.put<Unit>(`${this.apiUrl}/units/update/${id}`, unit);
   }
 
-  deleteUnit(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/units/${id}`);
+  deleteUnit(id: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/units/delete/${id}`,{ responseType: "text" as 'json' });
   }
 
   // // Company CRUD operations

@@ -1,5 +1,25 @@
 <div class="p-1">
-  <div>
-    This area is for form to add units
+  <div class="form-container">
+    <h2>ADD UNITS</h2>
+    <form [formGroup]="addUnitForm" (ngSubmit)="selectedUnit().id?onEdit():onAdd()" class="flex-column gap-1rem">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input aria-label="Name" matInput formControlName="name" required>
+        @if (addUnitForm.get('name')?.hasError('required')) {
+        <mat-error>
+          Name is required
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea aria-label="description" matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="addUnitForm.invalid">
+        {{selectedUnit().id?'UPDATE':'ADD'}}
+      </button>
+    </form>
   </div>
 </div>

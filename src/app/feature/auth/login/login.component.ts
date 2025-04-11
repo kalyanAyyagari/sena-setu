@@ -42,8 +42,7 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         console.log(response);
-        debugger
-        this.authService.setToken(response);
+        this.authService.setToken(response.token);
         // this.authService.setUser(response.user);
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
         this.router.navigateByUrl(this.returnUrl);

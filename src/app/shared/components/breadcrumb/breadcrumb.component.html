@@ -15,9 +15,9 @@
   @for (breadcrumb of breadcrumbs; track $index; let last= $last) {
     @if (!last) {
       <a [routerLink]="breadcrumb.url" mat-button class="breadcrumb-link">
-        {{ breadcrumb.label }}
+        {{ breadcrumb.label}}
       </a>
-      <span>></span>
+      <span>{{"->"}} </span>
     }
     @else {
       <span class="breadcrumb-current">

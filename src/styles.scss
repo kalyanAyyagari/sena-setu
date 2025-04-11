@@ -50,6 +50,9 @@ body {
   box-sizing: border-box;
 }
 
+.flex{
+  display: flex;
+}
 .flex-column{
   display: flex;
   flex-direction: column;
@@ -63,4 +66,17 @@ body {
 
 .p-1{
   padding: 1%;
+}
+
+.form-container{
+  margin: 0 auto;
+  width: 60%;
+  min-width: 335px;
+}
+.gap-1rem{
+  gap: 1rem;
+}
+
+.ml-auto{
+  margin-left: auto;
 }

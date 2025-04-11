@@ -15,7 +15,12 @@ export class AuthService {
   }
 
   login(credentials: { name: string, password: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, credentials, { responseType: "text" as 'json' });
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, credentials);
+  }
+
+  logout(): void {
+    sessionStorage.removeItem(this.tokenKey); // Replace 'token' with your JWT key
+    // localStorage.removeItem('user'); // Optional: Remove additional user data
   }
   // Retrieve the JWT token.
   getToken(): string | null {

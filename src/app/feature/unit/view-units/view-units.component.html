@@ -1,31 +1,32 @@
 <div class="p-1">
   <div>
     <button mat-raised-button color="primary" (click)="addToggle.set(!addToggle())" >
-      {{addToggle()?'ADD Unit':'View Units'}}
+      {{addToggle()?'View Units':'ADD Unit'}}
     </button>
     <input matInput type="search" placeholder="Search" class="search-input" />
   </div>
   @if (!addToggle()) {
     <div>
+      @for(unit of units(); track unit.id) {
         <div>
           <mat-card class="entity-card">
             <mat-card-header>
-              <mat-icon mat-card-avatar>person</mat-icon>
-              <mat-card-title>UNIT NAME</mat-card-title>
+              <mat-icon mat-card-avatar>item</mat-icon>
+              <mat-card-title>{{unit.name}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <p>Unit Name: test Unit </p>
-              <p>Unit Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. At natus, saepe eum explicabo, maiores suscipit iusto facilis soluta expedita ipsum dolorum. Exercitationem nesciunt aperiam excepturi explicabo nisi assumenda, similique sapiente! </p>
+              <p>Unit Description: {{unit.description}} </p>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-button color="primary" >Edit</button>
-              <button mat-button color="warn" >Delete</button>
+              <button mat-button color="primary" (click)="editUnit(unit)" >Edit</button>
+              <button mat-button color="warn" (click)="deleteUnit(unit.id)" >Delete</button>
             </mat-card-actions>
           </mat-card>
         </div>
+      }
     </div>
   }
   @else {
-    <app-add-unit></app-add-unit>
+    <app-add-unit [selectedUnit]="selectedUnit()" (reloadList)="reloadList()"/>
   }
 </div>

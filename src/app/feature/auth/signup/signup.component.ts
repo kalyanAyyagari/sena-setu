@@ -44,7 +44,7 @@ export class SignupComponent {
         this.authService.setToken(response.token);
         // this.authService.setUser(response.user);
         this.snackBar.open('Account created successfully!', 'Close', { duration: 3000 });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/units']);
       },
       error: (error) => {
         let errorMessage = 'An error occurred during signup';

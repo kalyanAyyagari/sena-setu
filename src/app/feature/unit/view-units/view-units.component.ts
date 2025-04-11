@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../../core/services/api.service';
 import { AddUnitComponent } from "../add-unit/add-unit.component";
+import { Unit } from '../../../core/models/helperModals';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-units',
@@ -16,26 +18,53 @@ import { AddUnitComponent } from "../add-unit/add-unit.component";
 })
 export class ViewUnitsComponent {
   unitId: string | null = null; // Initialize unitId as null
-  units = signal([]);
+  units = signal<Unit[]>([]);
   addToggle = signal(false);
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
-    // Simulate fetching the unit ID from a service or route parameter
-    this.unitId = '123'; // Replace with actual logic to get the unit ID
+    this.unitId = '123';
     this.getAllUnits();
   }
 
   getAllUnits() {
     this.units.set([]);
     this.apiService.getAllUnits().subscribe({
-      next: (response) => {
+      next: (response:Unit[]) => {
         console.log(response);
-
+        this.units.set(response);
       },
       error:(err)=> {
         console.error(err);
       },
     })
+  }
+  selectedUnit = signal<Unit>({ id: '', name: '', description: '', companyList: [] });
+  editUnit(unit: Unit) {
+    console.log('Edit unit with ID:', unit.id);
+    this.selectedUnit.set(unit);
+    this.addToggle.set(true);
+  }
+
+  deleteUnit(unitId: string) {
+    console.log('Delete unit with ID:', unitId);
+    this.apiService.deleteUnit(unitId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.snackBar.open("Unit deleted successfully", 'Close', { duration: 5000 });
+        this.getAllUnits();
+      },
+      error: (error) => {
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting the unit', 'Close', { duration: 5000 });
+      },
+    })
+  }
+  reloadList(){
+    this.selectedUnit.set({ id: '', name: '', description: '', companyList: [] });
+    this.addToggle.set(false);
+    this.getAllUnits();
   }
 }
