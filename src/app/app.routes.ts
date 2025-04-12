@@ -17,6 +17,12 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'account-management',
+    loadComponent: () => import('./shared/components/account-management/account-management.component')
+      .then(c => c.AccountManagementComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'units/:unitId/companies',
     loadComponent: () => import('./feature/company/view-companies/view-companies.component')
       .then(c => c.ViewCompaniesComponent),

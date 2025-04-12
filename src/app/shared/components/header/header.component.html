@@ -1,7 +1,10 @@
 <div class="header-container">
   <div class="flex">
-    <span>SENA SETU</span>
+    <span (click)="goToUnits()" class="pointer" >SENA SETU</span>
     <div class="ml-auto">
+      <button mat-button (click)="goToProfile()" >
+        <mat-icon>account_circle</mat-icon>
+      </button>
       <button mat-button color="warn" (click)="logout()" >Log Out</button>
     </div>
   </div>

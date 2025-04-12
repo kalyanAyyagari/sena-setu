@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule,MatIconModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -20,5 +21,15 @@ export class HeaderComponent {
     this.authService.logout();
     this.router.navigate(['/login']);
     console.log('Logout clicked');
+  }
+
+  goToProfile(): void {
+    this.router.navigate(['/account-management']);
+    console.log('Profile clicked');
+  }
+
+  goToUnits(): void {
+    this.router.navigate(['/units']);
+    console.log('Units clicked');
   }
 }
