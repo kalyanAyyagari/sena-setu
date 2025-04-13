@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from '../../../shared/components/details-dialog/details-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ViewTableComponent } from "../../../shared/components/view-table/view-table.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-units',
@@ -25,7 +26,7 @@ export class ViewUnitsComponent {
   addToggle = signal(false);
 
   cols = [
-    'NO',
+    'Open',
     'name',
     'description',
     'actions'
@@ -33,7 +34,8 @@ export class ViewUnitsComponent {
   constructor(
     private apiService: ApiService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -96,4 +98,7 @@ export class ViewUnitsComponent {
     this.addToggle.set(false);
   }
 
+  goToUnit(unitId: string) {
+    this.router.navigate([`/units/${unitId}/companies`]);
+  }
 }
