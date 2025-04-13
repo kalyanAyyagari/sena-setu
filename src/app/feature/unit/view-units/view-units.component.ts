@@ -86,8 +86,14 @@ export class ViewUnitsComponent {
 
   openDialog(row: { name: string; description: string }): void {
     this.dialog.open(DetailsDialogComponent, {
-      data: row
+      data: row,
+      width: '400px',
     });
+  }
+
+  cancelAddOrUpdate() {
+    this.selectedUnit.set({ id: '', name: '', description: '', companyList: [] });
+    this.addToggle.set(false);
   }
 
 }

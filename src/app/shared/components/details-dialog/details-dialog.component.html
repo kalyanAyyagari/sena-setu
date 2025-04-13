@@ -3,6 +3,10 @@
   <div mat-dialog-content>
     <p><strong>Name:</strong> {{ data.name }}</p>
     <p><strong>Description:</strong> {{ data.description }}</p>
+    <!-- Example of additional content to trigger scrolling -->
+     @for (extra of [].constructor(20); track $index) {
+       <p>Extra content row {{ extra }}</p>
+     }
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="closeDialog()">Close</button>
