@@ -1,5 +1,7 @@
-:host::ng-deep{
-  .mat-mdc-dialog-content {
-    word-wrap: break-word;
+:host::ng-deep {
+  .dialog-content {
+    .mat-mdc-dialog-content {
+      word-wrap: break-word;
+    }
   }
 }
