@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Unit } from '../models/helperModals';
+import { Company, Unit } from '../models/helperModals';
 // import { User } from '../models/user.model';
 // import { Unit } from '../models/unit.model';
 // import { Company } from '../models/company.model';
@@ -15,7 +15,7 @@ import { Unit } from '../models/helperModals';
 export class ApiService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Unit CRUD operations
   getAllUnits(): Observable<Unit[]> {
@@ -35,32 +35,29 @@ export class ApiService {
   }
 
   deleteUnit(id: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/units/delete/${id}`,{ responseType: "text" as 'json' });
+    return this.http.delete<string>(`${this.apiUrl}/units/delete/${id}`, { responseType: "text" as 'json' });
   }
 
-  // // Company CRUD operations
-  // getCompanies(unitId?: string): Observable<Company[]> {
-  //   const url = unitId
-  //     ? `${this.apiUrl}/units/${unitId}/companies`
-  //     : `${this.apiUrl}/companies`;
-  //   return this.http.get<Company[]>(url);
-  // }
+  // Company CRUD operations
+  getAllCompanies(): Observable<Company[]> {
+    return this.http.get<Company[]>(`${this.apiUrl}/companies/getAll`);
+  }
 
-  // getCompany(id: string): Observable<Company> {
-  //   return this.http.get<Company>(`${this.apiUrl}/companies/${id}`);
-  // }
+  getCompany(id: string): Observable<Company> {
+    return this.http.get<Company>(`${this.apiUrl}/companies/get/${id}`);
+  }
 
-  // createCompany(company: Partial<Company>): Observable<Company> {
-  //   return this.http.post<Company>(`${this.apiUrl}/companies`, company);
-  // }
+  createCompany(unitId: string, company: Partial<Company>): Observable<Company> {
+    return this.http.post<Company>(`${this.apiUrl}/companies/create/unit/${unitId}`, company);
+  }
 
-  // updateCompany(id: string, company: Partial<Company>): Observable<Company> {
-  //   return this.http.put<Company>(`${this.apiUrl}/companies/${id}`, company);
-  // }
+  updateCompany(UnitId: string, CompanyId: string, company: Partial<Company>): Observable<Company> {
+    return this.http.put<Company>(`${this.apiUrl}/companies/update/${CompanyId}/unit/${UnitId}`, company);
+  }
 
-  // deleteCompany(id: string): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/companies/${id}`);
-  // }
+  deleteCompany(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/companies/delete/${id}`);
+  }
 
   // // Product CRUD operations
   // getProducts(companyId?: string): Observable<Product[]> {

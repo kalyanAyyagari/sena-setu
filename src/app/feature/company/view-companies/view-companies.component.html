@@ -1,1 +1,22 @@
-<p>view-companies works!</p>
+<div class="p-1">
+  @if (!addToggle()) {
+    <div>
+      <div>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addToggle.set(!addToggle())">
+          {{addToggle()?'View Companies':'ADD Company'}}
+        </button>
+      </div>
+      <div class="company-Columns">
+        <app-view-table [dataSource]="companies()" [cols]="cols" class="cols" (editItem)="editCompany($event)"
+          (deleteItem)="deleteCompany($event)"></app-view-table>
+      </div>
+    </div>
+  }
+  @else {
+  <app-add-company [selectedCompany]="selectedCompany()" (reloadList)="reloadList()" (cancelAddOrUpdate)="cancelAddOrUpdate()" [unitId]="unitId" />
+  }
+</div>

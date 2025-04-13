@@ -1,1 +1,30 @@
-<p>add-company works!</p>
+<div class="p-1">
+  <div class="form-container">
+    <h2>ADD UNITS</h2>
+    <form [formGroup]="addCompanyForm" class="flex-column gap-1rem">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input aria-label="Name" matInput formControlName="name" required>
+        @if (addCompanyForm.get('name')?.hasError('required')) {
+        <mat-error>
+          Name is required
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea aria-label="description" matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <div class="flex gap-1rem">
+        <button mat-raised-button color="primary" class="full-width" (click)="cancelAddOrUpdate.emit()" >
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" class="full-width" [disabled]="addCompanyForm.invalid"
+          (click)="selectedCompany().id?onEdit():onAdd()">
+          {{selectedCompany().id?'UPDATE':'ADD'}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

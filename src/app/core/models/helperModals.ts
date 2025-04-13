@@ -9,6 +9,8 @@ export interface Company{
   name: string,
   description: string,
   id: string,
+  UnitId: string,
+  UnitName: string,
   productList: Product[],
 }
 
