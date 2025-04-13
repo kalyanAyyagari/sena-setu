@@ -1,26 +1,14 @@
 @use "../../../../assets/mixins.scss" as m;
 
-@include m.mat-table-columns(
-  (
-    // name: (width: 6rem, color: gray),
-    NO: (width: 10%, ),
-    name: (width: 20%, ),
-    description: (width: 50%),
-    actions: (width: 20%, ),
-  )
-);
-
-:host::ng-deep {
-  .mat-mdc-header-row,
-  .mat-mdc-row {
-    background: inherit;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    border: none !important;
-
+  :host::ng-deep {
+    @include m.mat-table-columns(
+      (
+        // name: (width: 6rem, color: gray),
+        NO: (width: 10%, ),
+        name: (width: 20%, ),
+        description: (width: 50%),
+        actions: (width: 20%, ),
+      )
+    );
   }
-  .mat-mdc-row{
-    height: 6rem;
-  }
-}
+

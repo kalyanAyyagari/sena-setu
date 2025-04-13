@@ -1,0 +1,53 @@
+
+
+:host::ng-deep {
+  // .mat-mdc-header-row,
+  // .mat-mdc-row {
+  //   background: inherit;
+  //   display: flex;
+  //   width: 100%;
+  //   align-items: center;
+  //   border: none !important;
+
+  // }
+  .mat-mdc-row{
+    height: 8rem;
+  }
+  .mat-mdc-table {
+    width: 100%;
+    max-height: 100px;
+    overflow: auto;
+  }
+}
+
+.table-container {
+  height: 400px;
+  overflow: auto;
+}
+
+.sticky-table {
+  max-height: 400px; /* Limit table height to enable scrolling */
+  overflow: auto;
+}
+
+// .mat-mdc-table-sticky {
+//   background: #59abfd;
+//   opacity: 1;
+// }
+
+// .example-sticky-toggle-group {
+//   margin: 8px;
+// }
+
+// .mat-column-filler {
+//   padding: 0 8px;
+//   font-size: 10px;
+//   text-align: center;
+// }
+
+// .mat-mdc-header-cell, .mat-mdc-footer-cell, .mat-mdc-cell {
+//   min-width: 80px;
+//   box-sizing: border-box;
+// }
+
+
