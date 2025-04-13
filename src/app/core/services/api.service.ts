@@ -56,7 +56,7 @@ export class ApiService {
   }
 
   deleteCompany(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/companies/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/companies/delete/${id}`, { responseType: "text" as 'json' });
   }
 
   // // Product CRUD operations

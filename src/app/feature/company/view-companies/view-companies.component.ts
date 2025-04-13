@@ -39,7 +39,7 @@ export class ViewCompaniesComponent {
   ) { }
 
   ngOnInit(): void {
-    this.unitId = this.route.snapshot.paramMap.get('UnitId') as string;
+    this.unitId = this.route.snapshot.paramMap.get('unitId') as string;
     this.getUnitById(this.unitId);
   }
 
