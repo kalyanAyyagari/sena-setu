@@ -1,1 +1,22 @@
-<p>view-products works!</p>
+<div class="p-1">
+  @if (!addToggle()) {
+    <div>
+      <div>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addToggle.set(!addToggle())">
+          {{addToggle()?'View Companies':'ADD Product'}}
+        </button>
+      </div>
+      <div class="product-Columns">
+        <app-view-table [dataSource]="products()" [cols]="cols" class="cols" (editItem)="editProduct($event)"
+          (deleteItem)="deleteProduct($event)" (goto)="goToSubProduct($event)" ></app-view-table>
+      </div>
+    </div>
+  }
+  @else {
+  <app-add-product [selectedProduct]="selectedProduct()" (reloadList)="reloadList()" (cancelAddOrUpdate)="cancelAddOrUpdate()" [companyId]="companyId" />
+  }
+</div>

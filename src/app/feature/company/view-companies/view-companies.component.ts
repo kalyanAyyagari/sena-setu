@@ -10,7 +10,7 @@ import { ApiService } from '../../../core/services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from '../../../shared/components/details-dialog/details-dialog.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-companies',
@@ -26,7 +26,7 @@ export class ViewCompaniesComponent {
   addToggle = signal(false);
 
   cols = [
-    'NO',
+    'Open',
     'name',
     'description',
     'actions'
@@ -35,20 +35,21 @@ export class ViewCompaniesComponent {
     private apiService: ApiService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.unitId = this.route.snapshot.paramMap.get('unitId') as string;
-    this.getUnitById(this.unitId);
+    this.getCompaniesByUnitId(this.unitId);
   }
 
-  getUnitById(unitId: string) {
+  getCompaniesByUnitId(unitId: string) {
     this.companies.set(new MatTableDataSource());
-    this.apiService.getUnit(unitId).subscribe({
+    this.apiService.getCompaniesByUnitId(unitId).subscribe({
       next: (response) => {
         console.log(response);
-        const dataSource = new MatTableDataSource(response.companyList);
+        const dataSource = new MatTableDataSource(response);
         this.companies.set(dataSource);
       },
       error: (error) => {
@@ -84,7 +85,7 @@ export class ViewCompaniesComponent {
       next: (response) => {
         console.log(response);
         this.snackBar.open("deleted successfully", 'Close', { duration: 5000 });
-        this.getUnitById(this.unitId);
+        this.getCompaniesByUnitId(this.unitId);
       },
       error: (error) => {
         this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting', 'Close', { duration: 5000 });
@@ -94,7 +95,7 @@ export class ViewCompaniesComponent {
   reloadList() {
     this.selectedCompany.set(this.getEmptyCompanyObject());
     this.addToggle.set(false);
-    this.getUnitById(this.unitId);
+    this.getCompaniesByUnitId(this.unitId);
   }
 
   applyFilter(event: Event) {
@@ -114,14 +115,15 @@ export class ViewCompaniesComponent {
     this.addToggle.set(false);
   }
 
+  goToCompany(companyId: string) {
+    this.router.navigate([`/units/${this.unitId}/companies/${companyId}/products`]);
+  }
+
   getEmptyCompanyObject(): Company {
     return {
       id: '',
       name: '',
       description: '',
-      UnitId: '',
-      UnitName: '',
-      productList: []
     };
   }
 }

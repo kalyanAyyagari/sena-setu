@@ -12,7 +12,7 @@
       </div>
       <div class="company-Columns">
         <app-view-table [dataSource]="companies()" [cols]="cols" class="cols" (editItem)="editCompany($event)"
-          (deleteItem)="deleteCompany($event)"></app-view-table>
+          (deleteItem)="deleteCompany($event)" (goto)="goToCompany($event)" ></app-view-table>
       </div>
     </div>
   }

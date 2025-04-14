@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Company, Unit } from '../models/helperModals';
+import { Company, Product, Unit } from '../models/helperModals';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -15,10 +15,6 @@ export class ApiService {
   // Unit CRUD operations
   getAllUnits(): Observable<Unit[]> {
     return this.http.get<Unit[]>(`${this.apiUrl}/units/getAll`);
-  }
-
-  getUnit(id: string): Observable<Unit> {
-    return this.http.get<Unit>(`${this.apiUrl}/units/get/${id}`);
   }
 
   createUnit(unit: Partial<Unit>): Observable<Unit> {
@@ -38,8 +34,8 @@ export class ApiService {
     return this.http.get<Company[]>(`${this.apiUrl}/companies/getAll`);
   }
 
-  getCompany(id: string): Observable<Company> {
-    return this.http.get<Company>(`${this.apiUrl}/companies/get/${id}`);
+  getCompaniesByUnitId(id: string): Observable<Company[]> {
+    return this.http.get<Company[]>(`${this.apiUrl}/companies/by-unit/${id}`);
   }
 
   createCompany(unitId: string, company: Partial<Company>): Observable<Company> {
@@ -54,29 +50,30 @@ export class ApiService {
     return this.http.delete<void>(`${this.apiUrl}/companies/delete/${id}`, { responseType: "text" as 'json' });
   }
 
-  // // Product CRUD operations
-  // getProducts(companyId?: string): Observable<Product[]> {
-  //   const url = companyId
-  //     ? `${this.apiUrl}/companies/${companyId}/products`
-  //     : `${this.apiUrl}/products`;
-  //   return this.http.get<Product[]>(url);
-  // }
+  // Product CRUD operations
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/products`);
+  }
 
-  // getProduct(id: string): Observable<Product> {
-  //   return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
-  // }
+  getProduct(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
+  }
 
-  // createProduct(product: Partial<Product>): Observable<Product> {
-  //   return this.http.post<Product>(`${this.apiUrl}/products`, product);
-  // }
+  getProductsByCompanyId(id: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/products/by-company/${id}`);
+  }
 
-  // updateProduct(id: string, product: Partial<Product>): Observable<Product> {
-  //   return this.http.put<Product>(`${this.apiUrl}/products/${id}`, product);
-  // }
+  createProduct(companyId: string, product: Partial<Product>): Observable<Product> {
+    return this.http.post<Product>(`${this.apiUrl}/products/company/${companyId}`, product);
+  }
 
-  // deleteProduct(id: string): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/products/${id}`);
-  // }
+  updateProduct(companyId : string, productId: string, product: Partial<Product>): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/products/${productId}/company/${companyId}`, product);
+  }
+
+  deleteProduct(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/products/${id}`);
+  }
 
   // // Subproduct CRUD operations
   // getSubproducts(productId?: string): Observable<Subproduct[]> {

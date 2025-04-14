@@ -9,16 +9,12 @@ export interface Company{
   name: string,
   description: string,
   id: string,
-  UnitId: string,
-  UnitName: string,
-  productList: Product[],
 }
 
 export interface Product{
   name: string,
   description: string,
   id: string,
-  subproductList: Subproduct[],
 }
 
 export interface Subproduct{

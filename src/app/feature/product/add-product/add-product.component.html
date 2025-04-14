@@ -1,1 +1,30 @@
-<p>add-product works!</p>
+<div class="p-1">
+  <div class="form-container">
+    <h2>ADD PRODUCTS</h2>
+    <form [formGroup]="addProductForm" class="flex-column gap-1rem">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input aria-label="Name" matInput formControlName="name" required>
+        @if (addProductForm.get('name')?.hasError('required')) {
+        <mat-error>
+          Name is required
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea aria-label="description" matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <div class="flex gap-1rem">
+        <button mat-raised-button color="primary" class="full-width" (click)="cancelAddOrUpdate.emit()" >
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" class="full-width" [disabled]="addProductForm.invalid"
+          (click)="selectedProduct().id?onEdit():onAdd()">
+          {{selectedProduct().id?'UPDATE':'ADD'}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

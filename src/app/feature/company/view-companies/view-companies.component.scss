@@ -1,0 +1,12 @@
+@use "../../../../assets/mixins.scss" as m;
+
+:host::ng-deep {
+  .company-Columns {
+    @include m.mat-table-columns(( // name: (width: 6rem, color: gray),
+        Open: (width: 10%, ),
+        name: (width: 20%, ),
+        description: (width: 50%),
+        actions: (width: 20%, ),
+      ));
+  }
+}

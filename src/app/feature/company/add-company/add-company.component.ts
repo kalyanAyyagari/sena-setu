@@ -42,7 +42,6 @@ export class AddCompanyComponent {
       this.addCompanyForm.patchValue({
         name: this.selectedCompany()?.name,
         description: this.selectedCompany()?.description,
-        UnitName: this.selectedCompany()?.UnitName,
       });
     }
   }
@@ -84,9 +83,6 @@ export class AddCompanyComponent {
       id: '',
       name: '',
       description: '',
-      UnitId: '',
-      UnitName: '',
-      productList: []
     };
   }
 }
