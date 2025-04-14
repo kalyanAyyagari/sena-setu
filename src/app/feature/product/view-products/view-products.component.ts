@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ApiService } from '../../../core/services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Product } from '../../../core/models/helperModals';
-import { DetailsDialogComponent } from '../../../shared/components/details-dialog/details-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -35,7 +33,6 @@ export class ViewProductsComponent {
   constructor(
     private apiService: ApiService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -103,13 +100,6 @@ export class ViewProductsComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.products().filter = filterValue.trim().toLowerCase();
-  }
-
-  openDialog(row: { name: string; description: string }): void {
-    this.dialog.open(DetailsDialogComponent, {
-      data: row,
-      width: '400px',
-    });
   }
 
   cancelAddOrUpdate() {

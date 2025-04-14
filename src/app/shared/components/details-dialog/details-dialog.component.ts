@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 })
 export class DetailsDialogComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { name: string; description: string },
+    @Inject(MAT_DIALOG_DATA) public data: { name: string; description?: string; quantity?: number; barcode?: string },
     public dialogRef: MatDialogRef<DetailsDialogComponent>
   ) {}
 

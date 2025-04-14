@@ -2,11 +2,15 @@
   <h2 mat-dialog-title>Row Details</h2>
   <div mat-dialog-content>
     <p><strong>Name:</strong> {{ data.name }}</p>
-    <p><strong>Description:</strong> {{ data.description }}</p>
-    <!-- Example of additional content to trigger scrolling -->
-     @for (extra of [].constructor(20); track $index) {
-       <p>Extra content row {{ extra }}</p>
-     }
+    @if (data.description) {
+      <p><strong>Description:</strong> {{ data.description }}</p>
+    }
+    @if (data.quantity !== undefined) {
+      <p><strong>Quantity:</strong> {{ data.quantity }}</p>
+    }
+    @if (data.barcode) {
+      <p><strong>Barcode:</strong> {{ data.barcode }}</p>
+    }
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="closeDialog()">Close</button>

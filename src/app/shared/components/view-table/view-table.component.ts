@@ -21,7 +21,7 @@ export class ViewTableComponent {
   deleteItem = output<string>();
   goto = output<string>();
   constructor(private dialog: MatDialog) { }
-  openDialog(row: { name: string; description: string }): void {
+  openDialog(row: { name: string; description?: string; quantity?: number; barcode?: string }): void {
     this.dialog.open(DetailsDialogComponent, {
       data: row
     });

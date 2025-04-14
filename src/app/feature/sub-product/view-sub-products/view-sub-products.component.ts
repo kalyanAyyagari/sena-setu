@@ -2,10 +2,8 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ApiService } from '../../../core/services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subproduct } from '../../../core/models/helperModals';
-import { DetailsDialogComponent } from '../../../shared/components/details-dialog/details-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -28,17 +26,15 @@ export class ViewSubProductsComponent {
     addToggle = signal(false);
 
     cols = [
-      'Open',
       'name',
+      'barcode',
       'quantity',
       'actions'
     ]
     constructor(
       private apiService: ApiService,
       private snackBar: MatSnackBar,
-      private dialog: MatDialog,
       private route: ActivatedRoute,
-      private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -105,13 +101,6 @@ export class ViewSubProductsComponent {
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.subproducts().filter = filterValue.trim().toLowerCase();
-    }
-
-    openDialog(row: { name: string; description: string }): void {
-      this.dialog.open(DetailsDialogComponent, {
-        data: row,
-        width: '400px',
-      });
     }
 
     cancelAddOrUpdate() {

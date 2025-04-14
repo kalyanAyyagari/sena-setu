@@ -6,8 +6,6 @@ import { AddUnitComponent } from "../add-unit/add-unit.component";
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Unit } from '../../../core/models/helperModals';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { DetailsDialogComponent } from '../../../shared/components/details-dialog/details-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ViewTableComponent } from "../../../shared/components/view-table/view-table.component";
 import { Router } from '@angular/router';
@@ -34,7 +32,6 @@ export class ViewUnitsComponent {
   constructor(
     private apiService: ApiService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog,
     private router:Router
   ) { }
 
@@ -84,13 +81,6 @@ export class ViewUnitsComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.units().filter = filterValue.trim().toLowerCase();
-  }
-
-  openDialog(row: { name: string; description: string }): void {
-    this.dialog.open(DetailsDialogComponent, {
-      data: row,
-      width: '400px',
-    });
   }
 
   cancelAddOrUpdate() {

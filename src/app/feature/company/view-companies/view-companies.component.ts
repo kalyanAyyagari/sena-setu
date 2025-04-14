@@ -8,8 +8,6 @@ import { AddCompanyComponent } from '../add-company/add-company.component';
 import { Company } from '../../../core/models/helperModals';
 import { ApiService } from '../../../core/services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { DetailsDialogComponent } from '../../../shared/components/details-dialog/details-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -34,7 +32,6 @@ export class ViewCompaniesComponent {
   constructor(
     private apiService: ApiService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -101,13 +98,6 @@ export class ViewCompaniesComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.companies().filter = filterValue.trim().toLowerCase();
-  }
-
-  openDialog(row: { name: string; description: string }): void {
-    this.dialog.open(DetailsDialogComponent, {
-      data: row,
-      width: '400px',
-    });
   }
 
   cancelAddOrUpdate() {
