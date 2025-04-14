@@ -19,7 +19,7 @@ export interface Product{
 
 export interface Subproduct{
   name: string,
-  description: string,
+  quantity: number,
   id: string,
   barcode: string,
 }

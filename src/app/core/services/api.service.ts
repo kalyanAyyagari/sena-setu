@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Company, Product, Unit } from '../models/helperModals';
+import { Company, Product, Subproduct, Unit } from '../models/helperModals';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -67,36 +67,36 @@ export class ApiService {
     return this.http.post<Product>(`${this.apiUrl}/products/company/${companyId}`, product);
   }
 
-  updateProduct(companyId : string, productId: string, product: Partial<Product>): Observable<Product> {
+  updateProduct(companyId: string, productId: string, product: Partial<Product>): Observable<Product> {
     return this.http.put<Product>(`${this.apiUrl}/products/${productId}/company/${companyId}`, product);
   }
 
-  deleteProduct(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/products/${id}`);
+  deleteProduct(id: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/products/${id}`, { responseType: "text" as 'json' });
   }
 
-  // // Subproduct CRUD operations
-  // getSubproducts(productId?: string): Observable<Subproduct[]> {
-  //   const url = productId
-  //     ? `${this.apiUrl}/products/${productId}/subproducts`
-  //     : `${this.apiUrl}/subproducts`;
-  //   return this.http.get<Subproduct[]>(url);
-  // }
+  // Subproduct CRUD operations
+  getAllSubproducts(): Observable<Subproduct[]> {
+    return this.http.get<Subproduct[]>(`${this.apiUrl}/sub-products`);
+  }
 
-  // getSubproduct(id: string): Observable<Subproduct> {
-  //   return this.http.get<Subproduct>(`${this.apiUrl}/subproducts/${id}`);
-  // }
+  getSubproduct(id: string): Observable<Subproduct> {
+    return this.http.get<Subproduct>(`${this.apiUrl}/sub-products/${id}`);
+  }
 
+  getSubproductsByProductId(id: string): Observable<Subproduct[]> {
+    return this.http.get<Subproduct[]>(`${this.apiUrl}/sub-products/by-product/${id}`);
+  }
 
-  // createSubproduct(subproduct: Partial<Subproduct>): Observable<Subproduct> {
-  //   return this.http.post<Subproduct>(`${this.apiUrl}/subproducts`, subproduct);
-  // }
+  createSubproduct(productId: string, subproduct: Partial<Subproduct>): Observable<Subproduct> {
+    return this.http.post<Subproduct>(`${this.apiUrl}/sub-products/product/${productId}`, subproduct);
+  }
 
-  // updateSubproduct(id: string, subproduct: Partial<Subproduct>): Observable<Subproduct> {
-  //   return this.http.put<Subproduct>(`${this.apiUrl}/subproducts/${id}`, subproduct);
-  // }
+  updateSubproduct(productId: string, subproductId: string, subproduct: Partial<Subproduct>): Observable<Subproduct> {
+    return this.http.put<Subproduct>(`${this.apiUrl}/sub-products/${subproductId}/product/${productId}`, subproduct);
+  }
 
-  // deleteSubproduct(id: string): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/subproducts/${id}`);
-  // }
+  deleteSubproduct(id: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/sub-products/${id}`,{ responseType: "text" as 'json' });
+  }
 }

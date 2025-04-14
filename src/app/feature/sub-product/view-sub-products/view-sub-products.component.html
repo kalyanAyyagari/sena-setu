@@ -1,1 +1,22 @@
-<p>view-sub-products works!</p>
+<div class="p-1">
+  @if (!addToggle()) {
+    <div>
+      <div>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addToggle.set(!addToggle())">
+          {{addToggle()?'View Subproducts':'ADD Subproduct'}}
+        </button>
+      </div>
+      <div class="subproduct-Columns">
+        <app-view-table [dataSource]="subproducts()" [cols]="cols" class="cols" (editItem)="editSubproduct($event)"
+          (deleteItem)="deleteSubproduct($event)"></app-view-table>
+      </div>
+    </div>
+  }
+  @else {
+  <app-add-sub-products [selectedSubproduct]="selectedSubproduct()" (reloadList)="reloadList()" (cancelAddOrUpdate)="cancelAddOrUpdate()" [productId]="productId" />
+  }
+</div>

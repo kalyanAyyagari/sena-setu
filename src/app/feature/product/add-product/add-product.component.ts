@@ -22,67 +22,67 @@ import { Product } from '../../../core/models/helperModals';
 })
 export class AddProductComponent {
   selectedProduct = input<Product>(this.getEmptyProductObject());
-    companyId = input.required<string>();
-    addProductForm: FormGroup;
-    reloadList = output();
-    cancelAddOrUpdate = output();
-    constructor(
-      fb: FormBuilder,
-      private apiService: ApiService,
-      private snackBar: MatSnackBar,
-    ) {
-      this.addProductForm = fb.group({
-        name: ['', Validators.required],
-        description: [''],
+  companyId = input.required<string>();
+  addProductForm: FormGroup;
+  reloadList = output();
+  cancelAddOrUpdate = output();
+  constructor(
+    fb: FormBuilder,
+    private apiService: ApiService,
+    private snackBar: MatSnackBar,
+  ) {
+    this.addProductForm = fb.group({
+      name: ['', Validators.required],
+      description: [''],
+    });
+  }
+
+  ngOnInit(): void {
+    if (this.selectedProduct().id) {
+      this.addProductForm.patchValue({
+        name: this.selectedProduct()?.name,
+        description: this.selectedProduct()?.description,
       });
     }
+  }
 
-    ngOnInit(): void {
-      if (this.selectedProduct().id) {
-        this.addProductForm.patchValue({
-          name: this.selectedProduct()?.name,
-          description: this.selectedProduct()?.description,
-        });
+  onAdd(): void {
+    if (this.addProductForm.invalid) return;
+    console.log(this.addProductForm.value);
+    this.apiService.createProduct(this.companyId(), this.addProductForm.value).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.snackBar.open("Added successfully", 'Close', { duration: 5000 });
+        this.reloadList.emit();
+      },
+      error: (error) => {
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while Adding', 'Close', { duration: 5000 });
       }
-    }
+    })
+    this.addProductForm.reset();
+  }
 
-    onAdd(): void {
-      if (this.addProductForm.invalid) return;
-      console.log(this.addProductForm.value);
-      this.apiService.createProduct(this.companyId(), this.addProductForm.value).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.snackBar.open("Added successfully", 'Close', { duration: 5000 });
-          this.reloadList.emit();
-        },
-        error: (error) => {
-          this.snackBar.open(error?.error?.message ?? 'An error occurred while Adding', 'Close', { duration: 5000 });
-        }
-      })
-      this.addProductForm.reset();
-    }
+  onEdit(): void {
+    if (this.addProductForm.invalid) return;
+    console.log(this.addProductForm.value);
+    this.apiService.updateProduct(this.companyId(), this.selectedProduct()?.id, this.addProductForm.value).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.snackBar.open("updated successfully", 'Close', { duration: 5000 });
+        this.reloadList.emit();
+      },
+      error: (error) => {
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating', 'Close', { duration: 5000 });
+      }
+    })
+    this.addProductForm.reset();
+  }
 
-    onEdit(): void {
-      if (this.addProductForm.invalid) return;
-      console.log(this.addProductForm.value);
-      this.apiService.updateProduct(this.companyId(), this.selectedProduct()?.id, this.addProductForm.value).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.snackBar.open("updated successfully", 'Close', { duration: 5000 });
-          this.reloadList.emit();
-        },
-        error: (error) => {
-          this.snackBar.open(error?.error?.message ?? 'An error occurred while updating', 'Close', { duration: 5000 });
-        }
-      })
-      this.addProductForm.reset();
-    }
-
-    getEmptyProductObject(): Product {
-      return {
-        id: '',
-        name: '',
-        description: '',
-      };
-    }
+  getEmptyProductObject(): Product {
+    return {
+      id: '',
+      name: '',
+      description: '',
+    };
+  }
 }

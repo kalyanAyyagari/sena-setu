@@ -1,1 +1,42 @@
-<p>add-sub-products works!</p>
+<div class="p-1">
+  <div class="form-container">
+    <h2>ADD SUB PRODUCTS</h2>
+    <form [formGroup]="addSubproductForm" class="flex-column gap-1rem">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input aria-label="Name" matInput formControlName="name" required>
+        @if (addSubproductForm.get('name')?.hasError('required')) {
+        <mat-error>
+          Name is required
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea aria-label="description" matInput formControlName="description"></textarea>
+      </mat-form-field> -->
+      <mat-form-field appearance="outline" floatLabel="always" style="width: 30%;">
+        <mat-label>Quantity</mat-label>
+        <div class="flex" style="justify-content: space-evenly;">
+          <button mat-icon-button color="primary" (click)="decrementQuantity()" type="button" aria-label="Decrement quantity">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <input aria-label="quantity" matInput formControlName="quantity"/>
+          <button mat-icon-button color="primary" (click)="incrementQuantity()" type="button" aria-label="Increment quantity">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </mat-form-field>
+      <div class="flex gap-1rem">
+        <button mat-raised-button color="primary" class="full-width" (click)="cancelAddOrUpdate.emit()">
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" class="full-width" [disabled]="addSubproductForm.invalid"
+          (click)="selectedSubproduct().id?onEdit():onAdd()">
+          {{selectedSubproduct().id?'UPDATE':'ADD'}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
