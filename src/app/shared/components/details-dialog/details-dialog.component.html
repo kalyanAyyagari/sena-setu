@@ -3,13 +3,14 @@
   <div mat-dialog-content>
     <p><strong>Name:</strong> {{ data.name }}</p>
     @if (data.description) {
-      <p><strong>Description:</strong> {{ data.description }}</p>
+    <p><strong>Description:</strong> {{ data.description }}</p>
     }
     @if (data.quantity !== undefined) {
-      <p><strong>Quantity:</strong> {{ data.quantity }}</p>
+    <p><strong>Quantity:</strong> {{ data.quantity }}</p>
     }
     @if (data.barcode) {
-      <p><strong>Barcode:</strong> {{ data.barcode }}</p>
+    <p><strong>Barcode:</strong> {{ data.barcode }}</p>
+    <div id="barcode-image-container"></div>
     }
   </div>
   <div mat-dialog-actions>

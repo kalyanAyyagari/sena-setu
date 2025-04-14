@@ -99,4 +99,8 @@ export class ApiService {
   deleteSubproduct(id: string): Observable<string> {
     return this.http.delete<string>(`${this.apiUrl}/sub-products/${id}`,{ responseType: "text" as 'json' });
   }
+
+  getBarcodeImage(barcodeString: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/barcodes/${barcodeString}`, { responseType: 'blob' });
+  }
 }
