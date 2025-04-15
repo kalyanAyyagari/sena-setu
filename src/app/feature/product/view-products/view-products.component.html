@@ -1,13 +1,14 @@
 <div class="p-1">
   @if (!addToggle()) {
     <div>
-      <div>
+      <div class="flex gap-1rem">
         <mat-form-field>
           <mat-label>Filter</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="addToggle.set(!addToggle())">
-          {{addToggle()?'View Products':'ADD Product'}}
+        <button class="addButton" mat-flat-button disableRipple="true" color="primary" (click)="addToggle.set(!addToggle())">
+          <mat-icon>add</mat-icon>
+          ADD Product
         </button>
       </div>
       <div class="product-Columns">
