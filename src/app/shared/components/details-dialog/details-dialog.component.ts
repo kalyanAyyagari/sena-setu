@@ -22,7 +22,7 @@ export class DetailsDialogComponent {
     private apiService: ApiService,
   ) { }
   numberOfCopies: number = 1;
-  maxCopiesPerPage: number = 10;
+  maxCopiesPerPage: number = 18;
   ngOnInit(): void {
     if (this.data.barcode) {
       this.apiService.getBarcodeImage(this.data.barcode).subscribe({
@@ -57,7 +57,6 @@ export class DetailsDialogComponent {
       return;
     }
     try {
-      // Create repeating barcode elements based on numberOfCopies
       const barcodeHtml = Array(this.numberOfCopies)
         .fill(printContent.innerHTML)
         .join('<div class="barcode-break"></div>');
@@ -74,7 +73,7 @@ export class DetailsDialogComponent {
               body {
                 margin: 0;
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 10mm;
                 padding: 10mm;
               }
