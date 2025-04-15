@@ -1,9 +1,56 @@
-.header-container{
-  position: fixed;
+.header-container {
+  background: linear-gradient(to right, #4b5320, #1f2605);  // Military olive green gradient
+  color: #e0e0c7;  // Light khaki text color
+  padding: 1rem 2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
   top: 0;
-  width: 100%;
   z-index: 1000;
-  height: 2rem;
-  background-color: #f5f5f5; /* Adjust according to your theme */
-  
+
+  .flex {
+    display: flex;
+    align-items: center;
+
+    span.pointer {
+      font-size: 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      letter-spacing: 1px;
+
+      &:hover {
+        opacity: 0.9;
+        color: #c5c5a6;  // Slightly darker on hover
+      }
+    }
+
+    .ml-auto {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      button {
+        color: #e0e0c7;  // Light khaki text color
+        font-weight: 500;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: rgba(75, 83, 32, 0.3);  // Lighter olive green with opacity
+        }
+
+        mat-icon {
+          margin-right: 4px;
+        }
+
+        &[color="warn"] {
+          &:hover {
+            background-color: rgba(128, 0, 0, 0.2);  // Dark red with opacity
+            color: #ffcccb;  // Light red text on hover
+          }
+        }
+      }
+    }
+  }
 }

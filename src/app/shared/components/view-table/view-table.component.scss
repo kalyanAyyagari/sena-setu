@@ -30,6 +30,15 @@
   overflow: auto;
 }
 
+.no-data{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+  color: #999;
+  font-weight: 500;
+}
+
 // .mat-mdc-table-sticky {
 //   background: #59abfd;
 //   opacity: 1;

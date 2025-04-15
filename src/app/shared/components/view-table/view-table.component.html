@@ -1,5 +1,5 @@
 <div class="table-container">
-  <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource()" class="mat-elevation-z2">
     @for (column of cols; track column) {
     @switch (column) {
     @case('actions'){
@@ -24,24 +24,26 @@
     </ng-container>
     }
     @case ('Open') {
-      <ng-container [matColumnDef]="column">
-        <th mat-header-cell *matHeaderCellDef style="border-bottom: 1px solid black;" > {{column}} </th>
-        <td mat-cell *matCellDef="let element;let i = index">
-          <button mat-button color="primary" (click)="goto.emit(element.id)">
-            <mat-icon>launch</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+    <ng-container [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef style="border-bottom: 1px solid black;"> {{column}} </th>
+      <td mat-cell *matCellDef="let element;let i = index">
+        <button mat-button color="primary" (click)="goto.emit(element.id)">
+          <mat-icon>launch</mat-icon>
+        </button>
+      </td>
+    </ng-container>
     }
     @default {
     <ng-container [matColumnDef]="column">
-      <th mat-header-cell *matHeaderCellDef style="border-bottom: 1px solid black;" > {{column}} </th>
+      <th mat-header-cell *matHeaderCellDef style="border-bottom: 1px solid black;"> {{column}} </th>
       <td mat-cell *matCellDef="let element;let i = index"> {{element[column]||i}} </td>
     </ng-container>
     }
     }
     }
-
+    <tr *matNoDataRow>
+      <td colspan="4" class="no-data"> No data available. Please add some data to visualise.</td>
+    </tr>
     <tr mat-header-row *matHeaderRowDef="cols; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: cols"></tr>
   </table>
