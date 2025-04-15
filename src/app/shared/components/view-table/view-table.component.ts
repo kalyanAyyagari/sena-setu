@@ -23,7 +23,10 @@ export class ViewTableComponent {
   constructor(private dialog: MatDialog) { }
   openDialog(row: { name: string; description?: string; quantity?: number; barcode?: string }): void {
     this.dialog.open(DetailsDialogComponent, {
-      data: row
+      data: row,
+      // width: '600px',
+      // minHeight: '400px',
+      // height: '90vh',
     });
   }
 

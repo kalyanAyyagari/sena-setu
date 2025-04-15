@@ -11,9 +11,21 @@
     @if (data.barcode) {
     <p><strong>Barcode:</strong> {{ data.barcode }}</p>
     <div id="barcode-image-container"></div>
+    <div class="print-options">
+      <mat-form-field>
+        <mat-label>Number of Copies</mat-label>
+        <input matInput type="number" [(ngModel)]="numberOfCopies" min="1" [max]="maxCopiesPerPage"
+          (keydown)="onlyNumbers($event)">
+        <mat-hint>Maximum {{ maxCopiesPerPage }} copies per A4 sheet</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="printBarcode()">
+        <mat-icon>print</mat-icon>
+        Print Barcodes
+      </button>
+    </div>
     }
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="closeDialog()">Close</button>
+    <div mat-dialog-actions>
+      <button mat-button (click)="closeDialog()">Close</button>
+    </div>
   </div>
 </div>
