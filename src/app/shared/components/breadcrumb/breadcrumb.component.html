@@ -1,5 +1,5 @@
 @if (displayBreadcrumbs()) {
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="breadcrumb-container" >
   @for (breadcrumb of breadcrumbs(); track $index; let last= $last) {
   @if (!last) {
   <a [routerLink]="breadcrumb.url" mat-button class="breadcrumb-link">

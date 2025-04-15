@@ -1,6 +1,6 @@
 .breadcrumb-link {
   text-decoration: none;
-  color: blue;
+  color: #18a700;
   font-size: 1rem;
   font-family: monospace;
 }
@@ -11,4 +11,12 @@
   font-size: 1rem;
   font-family: monospace;
   /* Adjust according to your theme */
+}
+
+.breadcrumb-container {
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #ebeedd, #c6ceaa);
+  // position: sticky;
+  // top: 0;
+  z-index: 1000;
 }
