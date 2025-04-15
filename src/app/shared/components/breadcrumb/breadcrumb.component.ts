@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,10 +16,11 @@ interface Breadcrumb {
   imports: [RouterLink, MatChipsModule, MatIconModule,MatToolbarModule],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.scss',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbComponent {
-  breadcrumbs: Breadcrumb[] = [];
+  breadcrumbs = signal<Breadcrumb[]>([]);
+  displayBreadcrumbs = signal<boolean>(true);
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -37,7 +38,11 @@ export class BreadcrumbComponent {
     const url = this.router.url;
     // Split the URL into segments
     const urlSegments = url.split('/').filter(segment => segment);
-
+    if(urlSegments.includes('account-management') || urlSegments.includes('login')) {
+      this.displayBreadcrumbs.set(false);
+      return;
+    }
+    this.displayBreadcrumbs.set(true);
     // Generate breadcrumbs
     const breadcrumbs: Breadcrumb[] = [];
     let currentUrl = '';
@@ -45,7 +50,7 @@ export class BreadcrumbComponent {
     // Handle the special case for the root/home path
     if (urlSegments.length === 0 || (urlSegments.length === 1 && urlSegments[0] === 'units')) {
       breadcrumbs.push({ label: 'Units', url: '/units' });
-      this.breadcrumbs = breadcrumbs;
+      this.breadcrumbs.set(breadcrumbs);
       return;
     }
 
@@ -84,7 +89,7 @@ export class BreadcrumbComponent {
       }
     }
 
-    this.breadcrumbs = breadcrumbs;
+    this.breadcrumbs.set(breadcrumbs); // Update the signal with the generated breadcrumbs;
   }
 
 }

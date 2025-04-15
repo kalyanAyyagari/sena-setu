@@ -1,7 +1,8 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { User } from '../models/helperModals';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem(this.tokenKey); // Replace 'token' with your JWT key
-    // localStorage.removeItem('user'); // Optional: Remove additional user data
+    localStorage.removeItem('user'); // Optional: Remove additional user data
   }
   // Retrieve the JWT token.
   getToken(): string | null {
@@ -36,6 +37,15 @@ export class AuthService {
   // Clear the JWT token (e.g., on logout).
   clearToken(): void {
     sessionStorage.removeItem(this.tokenKey);
+  }
+
+  getUser(): User | null {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  setUser(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   // Check if the user is logged in.

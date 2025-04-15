@@ -43,7 +43,7 @@ export class LoginComponent {
       next: (response) => {
         console.log(response);
         this.authService.setToken(response.token);
-        // this.authService.setUser(response.user);
+        this.authService.setUser(response);
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
         this.router.navigateByUrl(this.returnUrl);
       },

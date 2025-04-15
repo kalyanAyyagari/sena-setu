@@ -36,6 +36,7 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  // background-color: #4b5320;
 }
 
 // Add these new styles
@@ -62,6 +63,11 @@ body {
 .flex-column{
   display: flex;
   flex-direction: column;
+}
+
+.justify-center{
+  display: flex;
+  justify-content: center;
 }
 
 .flex-center{

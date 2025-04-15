@@ -1,1 +1,71 @@
-<p>account-management works!</p>
+<div class="account-container">
+  <!-- User Profile Card -->
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <mat-card-title>Profile Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (currentUser(); as user) {
+      <div class="user-info">
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Role:</strong> {{ user.role }}</p>
+        <p><strong>Post:</strong> {{ user.post }}</p>
+      </div>
+      }
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Admin Section -->
+  @if (isAdmin()) {
+  <div class="admin-section">
+    <h2>User Management</h2>
+
+    <!-- Filter -->
+    <mat-form-field class="filter-field">
+      <mat-label>Search Users</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search users..." #input>
+    </mat-form-field>
+
+    <!-- Users Table -->
+    <table mat-table [dataSource]="users()" class="users-table mat-elevation-z3">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let user">{{user.name}}</td>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let user">{{user.role}}</td>
+      </ng-container>
+
+      <!-- Post Column -->
+      <ng-container matColumnDef="post">
+        <th mat-header-cell *matHeaderCellDef>Post</th>
+        <td mat-cell *matCellDef="let user">{{user.post}}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="width: 40%;text-align: center;">Actions</th>
+        <td mat-cell *matCellDef="let user">
+          <div class="justify-center">
+            <button mat-button color="primary" (click)="makeAdmin(user)" matTooltip="Make Admin">
+              <mat-icon>admin_panel_settings</mat-icon>
+              Make Admin
+            </button>
+            <button mat-button color="warn" (click)="deleteUser(user)" matTooltip="Delete User">
+              <mat-icon>delete</mat-icon>
+              Delete User
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  }
+</div>

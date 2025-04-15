@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Company, Product, Subproduct, Unit } from '../models/helperModals';
+import { Company, Product, Subproduct, Unit, User } from '../models/helperModals';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -102,5 +102,26 @@ export class ApiService {
 
   getBarcodeImage(barcodeString: string): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/barcodes/${barcodeString}`, { responseType: 'blob' });
+  }
+
+  // User operations
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users/getAll`);
+  }
+
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/get/${id}`);
+  }
+
+  updateUser(id: number, user: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/users/update/${id}`, user);
+  }
+
+  makeUserAdmin(username: string): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/users/admin/${username}`, {});
+  }
+
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/users/delete/${id}`);
   }
 }
