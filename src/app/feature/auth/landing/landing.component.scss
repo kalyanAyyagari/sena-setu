@@ -1,10 +1,17 @@
 .auth-card {
   width: 60%;
-  height: 24rem;
+  // height: 24rem;
 }
 
 :host ::ng-deep {
-  .mat-mdc-tab-body {
-    min-height: 19rem;
+  .landing-container {
+    .mat-mdc-tab-body {
+      min-height: 19rem;
+    }
+
+    .mat-mdc-tab-body-content {
+      height: 100%;
+      overflow: hidden;
+    }
   }
 }

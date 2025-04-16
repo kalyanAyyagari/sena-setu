@@ -16,7 +16,7 @@
         <mat-label>Description</mat-label>
         <textarea aria-label="description" matInput formControlName="description"></textarea>
       </mat-form-field> -->
-      <mat-form-field appearance="outline" floatLabel="always" style="min-width: 10%;max-width: 30%;">
+      <mat-form-field appearance="outline" floatLabel="always" style="width: max(30%, 10rem);">
         <mat-label>Quantity</mat-label>
         <div class="flex" style="justify-content: space-evenly;">
           <button mat-icon-button color="primary" [disabled]="!addSubproductForm.get('quantity')?.value" (click)="decrementQuantity()" type="button" aria-label="Decrement quantity">

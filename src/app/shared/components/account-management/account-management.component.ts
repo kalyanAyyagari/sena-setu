@@ -49,7 +49,7 @@ export class AccountManagementComponent {
   private loadUsers(): void {
     if (this.isAdmin()) {
       this.apiService.getAllUsers().subscribe({
-        next: (users) => this.users.set(new MatTableDataSource(users)),
+        next: (users) => this.users.set(new MatTableDataSource(users.filter(user => user.id !== this.currentUser()?.id))),
         error: (error) => this.showError('Failed to load users')
       });
     }

@@ -6,14 +6,27 @@
   margin: 0 auto;
 
   .profile-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     margin-bottom: 2rem;
+    border-radius: 10px;
+
+    .mat-mdc-card-header {
+      padding: 1rem;
+      background: rgba(75, 83, 32, 0.2);
+      border-radius: 10px 10px 0 0;
+    }
 
     .user-info {
-      padding: 1rem;
+      padding: 1.5rem;
 
       p {
         margin: 0.5rem 0;
         font-size: 1.1rem;
+        color: #333;
       }
     }
   }
@@ -21,28 +34,60 @@
   .admin-section {
     h2 {
       margin-bottom: 1rem;
+      color: #4b5320;
     }
 
     .filter-field {
       width: 100%;
       margin-bottom: 1rem;
     }
+  }
 
-    .users-table {
-      width: 100%;
-      background: white;
-      // box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  // .table-container {
+  //   height: 400px;
+  //   overflow: auto;
+  //   border-radius: 4px;
 
-      th, td {
-        padding: 1rem;
-      }
+  //   .users-table {
+  //     width: 100%;
+  //   }
 
-      th {
-        font-weight: 500;
-        color: rgba(0,0,0,0.87);
-        width: 20%;
-      }
-    }
+  //   .mat-mdc-header-row {
+  //     position: sticky;
+  //     top: 0;
+  //     background-color: #37440a;
+  //     z-index: 10;
+  //     border-bottom: 2px solid #e0e0e0;
+  //     min-height: 56px;
+  //     color: #e0e0c7;
+  //   }
+
+  //   .mat-mdc-header-cell {
+  //     font-weight: 600;
+  //     // color: #333;
+  //     padding: 0 16px;
+  //   }
+
+  //   .mat-mdc-row:nth-child(even) {
+  //     background-color: #fafafa;
+  //   }
+
+  //   .mat-mdc-row:hover {
+  //     background-color: #f0f0f0;
+  //   }
+  // }
+
+  .filter-field {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+:host::ng-deep {
+  .mat-mdc-table {
+    width: 100%;
+    // max-height: 100px;
+    overflow: auto;
   }
 }
 
