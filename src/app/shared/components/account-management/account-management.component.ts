@@ -85,10 +85,17 @@ export class AccountManagementComponent {
   }
 
   private showSuccess(message: string): void {
-    this.snackBar.open(message, 'Close', { duration: 3000 });
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 
   private showError(message: string): void {
-    this.snackBar.open(message, 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+    this.snackBar.open(message, 'Close', {
+      duration: 5000, panelClass: 'error-snackbar',
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 }
