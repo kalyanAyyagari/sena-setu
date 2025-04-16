@@ -49,14 +49,6 @@ body {
   color: #023d09;
 }
 
-.mat-mdc-card {
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-}
-
 // Override Material styles for frosted glass effect
 .mat-mdc-form-field-appearance-fill .mat-mdc-text-field-wrapper {
   background: rgba(255, 255, 255, 0.1);
