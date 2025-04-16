@@ -131,6 +131,6 @@ export class ApiService {
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/users/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/users/delete/${id}`, { responseType: "text" as 'json' });
   }
 }
