@@ -22,6 +22,7 @@ export class ViewUnitsComponent {
   unitId: string | null = null; // Initialize unitId as null
   units = signal(new MatTableDataSource<Unit>());
   addToggle = signal(false);
+  editOrDeleteAcess = false;
 
   cols = [
     'Open',
@@ -37,6 +38,7 @@ export class ViewUnitsComponent {
 
   ngOnInit(): void {
     this.getAllUnits();
+    this.editOrDeleteAcess = this.apiService.getEditOrDeleteAccess();
   }
 
   getAllUnits() {

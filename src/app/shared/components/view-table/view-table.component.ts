@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ViewTableComponent {
   dataSource: any = input();
+  editOrDeleteAcess = input<boolean>(true);
   @Input() cols: string[] = [];
   editItem = output<any>();
   deleteItem = output<string>();

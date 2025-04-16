@@ -1,6 +1,6 @@
 <div class="login-form-container">
   <h2>Log In to Your Account</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex-column">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex-column gap-1rem">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Name</mat-label>
       <input aria-label="Name" matInput formControlName="name" required>

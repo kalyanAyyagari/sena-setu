@@ -6,13 +6,15 @@
           <mat-label>Filter</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
         </mat-form-field>
-        <button class="addButton" mat-flat-button disableRipple="true" color="primary" (click)="addToggle.set(!addToggle())">
-          <mat-icon>add</mat-icon>
-          ADD Unit
-        </button>
+        @if (editOrDeleteAcess) {
+          <button class="addButton" mat-flat-button disableRipple="true" color="primary" (click)="addToggle.set(!addToggle())">
+            <mat-icon>add</mat-icon>
+            ADD Unit
+          </button>
+        }
       </div>
       <div class="unit-Columns">
-        <app-view-table [dataSource]="units()" [cols]="cols" class="cols" (editItem)="editUnit($event)"
+        <app-view-table class="cols" [dataSource]="units()" [cols]="cols" [editOrDeleteAcess]="editOrDeleteAcess" (editItem)="editUnit($event)"
           (deleteItem)="deleteUnit($event)" (goto)="goToUnit($event)" />
       </div>
     </div>

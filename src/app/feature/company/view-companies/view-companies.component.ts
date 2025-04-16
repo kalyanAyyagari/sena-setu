@@ -22,7 +22,7 @@ export class ViewCompaniesComponent {
   unitId: string = '';
   companies = signal(new MatTableDataSource<Company>());
   addToggle = signal(false);
-
+  editOrDeleteAcess = false;
   cols = [
     'Open',
     'name',
@@ -39,6 +39,7 @@ export class ViewCompaniesComponent {
   ngOnInit(): void {
     this.unitId = this.route.snapshot.paramMap.get('unitId') as string;
     this.getCompaniesByUnitId(this.unitId);
+    this.editOrDeleteAcess = this.apiService.getEditOrDeleteAccess();
   }
 
   getCompaniesByUnitId(unitId: string) {

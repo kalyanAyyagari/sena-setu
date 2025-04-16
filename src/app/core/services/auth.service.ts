@@ -40,12 +40,12 @@ export class AuthService {
   }
 
   getUser(): User | null {
-    const user = localStorage.getItem('user');
+    const user = sessionStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 
   setUser(user: User): void {
-    localStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user));
   }
 
   // Check if the user is logged in.

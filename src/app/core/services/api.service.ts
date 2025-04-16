@@ -12,6 +12,15 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  getEditOrDeleteAccess(): boolean {
+    const user = sessionStorage.getItem('user');
+    if (user) {
+      const userObj = JSON.parse(user);
+      return userObj?.role === 'ADMIN';
+    }
+    return false;
+  }
+
   // Unit CRUD operations
   getAllUnits(): Observable<Unit[]> {
     return this.http.get<Unit[]>(`${this.apiUrl}/units/getAll`);
@@ -97,7 +106,7 @@ export class ApiService {
   }
 
   deleteSubproduct(id: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/sub-products/${id}`,{ responseType: "text" as 'json' });
+    return this.http.delete<string>(`${this.apiUrl}/sub-products/${id}`, { responseType: "text" as 'json' });
   }
 
   getBarcodeImage(barcodeString: string): Observable<Blob> {

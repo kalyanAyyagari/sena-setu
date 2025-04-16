@@ -11,14 +11,16 @@
             <mat-icon>fullscreen</mat-icon>
             Expand
           </button>
-          <button mat-button color="primary" (click)="editFunction(element)">
-            <mat-icon>edit</mat-icon>
-            Edit
-          </button>
-          <button mat-button color="warn" (click)="deleteFunction(element.id)">
-            <mat-icon>delete</mat-icon>
-            Delete
-          </button>
+          @if (editOrDeleteAcess()) {
+            <button mat-button color="secondary" (click)="editFunction(element)">
+              <mat-icon>edit</mat-icon>
+              Edit
+            </button>
+            <button mat-button color="warn" (click)="deleteFunction(element.id)">
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+          }
         </div>
       </td>
     </ng-container>
@@ -36,7 +38,7 @@
     @default {
     <ng-container [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef style="border-bottom: 1px solid black;"> {{column}} </th>
-      <td mat-cell *matCellDef="let element;let i = index"> {{element[column]||i}} </td>
+      <td mat-cell *matCellDef="let element;let i = index"> {{element[column]||'--'}} </td>
     </ng-container>
     }
     }

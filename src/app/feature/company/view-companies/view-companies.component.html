@@ -6,13 +6,15 @@
           <mat-label>Filter</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
         </mat-form-field>
-        <button class="addButton" mat-flat-button disableRipple="true" color="primary" (click)="addToggle.set(!addToggle())">
-          <mat-icon>add</mat-icon>
-          ADD Company
-        </button>
+        @if (editOrDeleteAcess) {
+          <button class="addButton" mat-flat-button disableRipple="true" color="primary" (click)="addToggle.set(!addToggle())">
+            <mat-icon>add</mat-icon>
+            ADD Company
+          </button>
+        }
       </div>
       <div class="company-Columns">
-        <app-view-table [dataSource]="companies()" [cols]="cols" class="cols" (editItem)="editCompany($event)"
+        <app-view-table class="cols" [dataSource]="companies()" [cols]="cols" [editOrDeleteAcess]="editOrDeleteAcess" (editItem)="editCompany($event)"
           (deleteItem)="deleteCompany($event)" (goto)="goToCompany($event)" ></app-view-table>
       </div>
     </div>
