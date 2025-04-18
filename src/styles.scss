@@ -1,30 +1,44 @@
-// @use '@angular/material' as mat;
-// @use "sass:map";
-// @include mat.core();
+@use '@angular/material' as mat;
+@include mat.core();
+// Define a custom military green palette
+$military-green: (
+  50: #e6e9db,
+  100: #c1c8a9,
+  200: #9ba76d,
+  300: #7a8a3e,
+  400: #61732a,
+  500: #4b5320,
+  600: #3e471a,
+  700: #37440a,
+  800: #2c3507,
+  900: #1f2605,
+  contrast: (
+    50: #1f2605,
+    100: #1f2605,
+    200: #1f2605,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+  )
+);
 
-// $light-theme: mat.define-theme((
-//   color: (
-//     theme-type: light,
-//     primary:mat.$azure-palette,
-//   )
-// ));
+$primary: mat.m2-define-palette($military-green, 500, 300, 700);
+$accent: mat.m2-define-palette(mat.$m2-lime-palette, 600, 300, 900);
+$warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-// $dark-theme: mat.define-theme((
-//   color:(
-//     theme-type: dark,
-//     primary:mat.$azure-palette,
-//   )
-// ));
+$theme: mat.m2-define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+));
 
-// // Apply the light theme styles globally (default)
-// html{
-//   @include mat.all-component-themes(map.get($light-theme, 'color'));
-// }
-
-// // Define a CSS class for dark mode that applies the dark theme
-// .dark-theme {
-//   @include mat.all-component-themes(map.get($dark-theme, 'color'));
-// }
+@include mat.all-component-themes($theme);
 
 html, body {
   height: 100%;
@@ -85,6 +99,11 @@ body {
 .justify-center{
   display: flex;
   justify-content: center;
+}
+
+.align-center{
+  display: flex;
+  align-items: center;
 }
 
 .flex-center{
