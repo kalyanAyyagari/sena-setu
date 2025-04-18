@@ -7,7 +7,7 @@
       &#{$colName} {
         flex: 0 0 $width;
         min-width: $width;
-        border: none;
+        // border: none;
 
         @if map-has-key($props, 'color') {
           color: map-get($props, 'color');

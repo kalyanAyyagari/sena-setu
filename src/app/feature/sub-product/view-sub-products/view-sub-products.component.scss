@@ -1,0 +1,12 @@
+@use "../../../../assets/mixins.scss" as m;
+
+:host::ng-deep {
+  .subproduct-Columns {
+    @include m.mat-table-columns(( // name: (width: 6rem, color: gray),
+        Subproduct: (width: 25%, ),
+        Barcode: (width: 25%, ),
+        Quantity: (width: 25%),
+        Actions: (width: 25%, ),
+      ));
+  }
+}

@@ -26,11 +26,12 @@ export class ViewSubProductsComponent {
     addToggle = signal(false);
 
     cols = [
-      'name',
-      'barcode',
-      'quantity',
-      'actions'
-    ]
+      { name: 'Subproduct', value: 'name' },
+      { name: 'Barcode', value: 'barcode' },
+      { name: 'Quantity', value: 'quantity' },
+      { name: 'Actions', value: 'actions' }
+    ];
+
     constructor(
       private apiService: ApiService,
       private snackBar: MatSnackBar,

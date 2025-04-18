@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ViewTableComponent {
   dataSource: any = input();
   editOrDeleteAcess = input<boolean>(true);
-  @Input() cols: string[] = [];
+  @Input() cols: {name:string,value:string}[] = [];
   editItem = output<any>();
   deleteItem = output<string>();
   goto = output<string>();
@@ -36,5 +36,9 @@ export class ViewTableComponent {
   }
   deleteFunction(id: string) {
     this.deleteItem.emit(id);
+  }
+
+  getValueByKey(list: any[], key: string): string[] {
+    return list.map(item=> item[key]);
   }
 }

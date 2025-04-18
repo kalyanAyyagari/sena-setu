@@ -25,11 +25,11 @@ export class ViewUnitsComponent {
   editOrDeleteAcess = false;
 
   cols = [
-    'Open',
-    'name',
-    'description',
-    'actions'
+    { name: 'Name', value: 'name' },
+    { name: 'Description', value: 'description' },
+    { name: 'Actions', value: 'actions' }
   ]
+
   constructor(
     private apiService: ApiService,
     private snackBar: MatSnackBar,
