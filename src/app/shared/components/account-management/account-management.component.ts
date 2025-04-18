@@ -31,7 +31,7 @@ export class AccountManagementComponent {
   private authService = inject(AuthService);
   private snackBar = inject(MatSnackBar);
 
-  displayedColumns = ['name', 'role', 'post', 'actions'];
+  displayedColumns = ['name', 'role', 'rank','armyNumber', 'company', 'actions'];
   // users = signal<User[]>([]);
   users = signal(new MatTableDataSource<User>());
   logs = signal(new MatTableDataSource<Log>());
