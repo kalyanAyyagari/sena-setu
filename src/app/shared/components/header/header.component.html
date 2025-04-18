@@ -1,11 +1,17 @@
 <div class="header-container">
   <div class="flex">
-    <span (click)="goToUnits()" class="pointer">
-      <mat-icon>shopping_cart</mat-icon>
-      SENA SETU
-    </span>
+    <div class="left-section">
+      <span (click)="goToUnits()" class="pointer">
+        <mat-icon>shopping_cart</mat-icon>
+        SENA SETU
+      </span>
+    </div>
+
     @if (!isAuthPage()) {
-      <div class="ml-auto">
+      <div class="center-section">
+        <app-global-search class="width-full"/>
+      </div>
+      <div class="buttoncss right-section">
         <button mat-button (click)="goToProfile()">
           <mat-icon>account_circle</mat-icon>
           Profile

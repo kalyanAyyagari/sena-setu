@@ -1,0 +1,18 @@
+<div class="header-search">
+
+  <input #search type="text" matInput [value]="searchText$.value" (input)="onSearchInput(search.value)" placeholder="Search"
+    [matAutocomplete]="auto" />
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event.option.value)">
+    @for (option of searchOptions(); track $index) {
+    <mat-option [value]="option">
+      <div class="flex gap-1rem">
+        <mat-icon >search</mat-icon>
+        <span>{{option.type}}</span>
+        <mat-icon>arrow_forward</mat-icon>
+        {{option.name}}
+      </div>
+    </mat-option>
+    }
+  </mat-autocomplete>
+</div>

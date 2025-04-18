@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IdleService } from '../../../core/services/idle.service';
+import { GlobalSearchComponent } from "../global-search/global-search.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule, GlobalSearchComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush

@@ -40,3 +40,17 @@ export interface Log {
   detail: string,
   updatedAt: string,
 }
+
+export interface GlobalSearchResult {
+  id: number,
+  name: string,
+  type: 'UNIT' | 'COMPANY' | 'PRODUCT' | 'SUBPRODUCT',
+  productName: string | null,
+  companyName: string | null,
+  unitName: string,
+  quantity: number | null,
+  barcode: string | null,
+  unitId: number,
+  companyId: number | null,
+  productId: number | null,
+}

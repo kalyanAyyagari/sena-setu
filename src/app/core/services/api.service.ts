@@ -137,4 +137,8 @@ export class ApiService {
   getLogs(): Observable<Log[]> {
     return this.http.get<Log[]>(`${this.apiUrl}/logger/getLoggingDetails`);
   }
+
+  getGlobalSearchResults(searchTerm: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/search/${searchTerm}`);
+  }
 }
