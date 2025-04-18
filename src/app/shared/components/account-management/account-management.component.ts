@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -8,9 +8,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { User } from '../../../core/models/helperModals';
+import { Log, User } from '../../../core/models/helperModals';
 import { ApiService } from '../../../core/services/api.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-account-management',
@@ -18,7 +20,7 @@ import { AuthService } from '../../../core/services/auth.service';
   imports: [
     CommonModule, MatTableModule, MatInputModule, MatButtonModule,
     MatIconModule, FormsModule, MatFormFieldModule, MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule, MatTabsModule, MatPaginator
   ],
   templateUrl: './account-management.component.html',
   styleUrl: './account-management.component.scss',
@@ -32,6 +34,8 @@ export class AccountManagementComponent {
   displayedColumns = ['name', 'role', 'post', 'actions'];
   // users = signal<User[]>([]);
   users = signal(new MatTableDataSource<User>());
+  logs = signal(new MatTableDataSource<Log>());
+  @ViewChild(MatPaginator) logsPaginator!: MatPaginator;
   currentUser = signal<User | null>(null);
   filterValue = signal('');
 
@@ -40,6 +44,11 @@ export class AccountManagementComponent {
   constructor() {
     this.loadCurrentUser();
     this.loadUsers();
+    this.loadLogs();
+  }
+
+  ngAfterViewInit() {
+    this.logs().paginator = this.logsPaginator;
   }
 
   private loadCurrentUser(): void {
@@ -54,10 +63,22 @@ export class AccountManagementComponent {
       });
     }
   }
+  private loadLogs(): void {
+    if (this.isAdmin()) {
+      this.apiService.getLogs().subscribe({
+        next: (logs) => this.logs.set(new MatTableDataSource(logs)),
+        error: (error) => this.showError('Failed to load logs')
+      });
+    }
+  }
 
-  applyFilter(event: Event): void {
+  applyFilter(event: Event, type: 'users' | 'logs'): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.users().filter = filterValue.trim().toLowerCase();
+    this[type]().filter = filterValue.trim().toLowerCase();
+  }
+
+  onLogsPageChange(event: any) {
+    this.logs().paginator = this.logsPaginator;
   }
 
   makeAdmin(user: User): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Company, Product, Subproduct, Unit, User } from '../models/helperModals';
+import { Company, Log, Product, Subproduct, Unit, User } from '../models/helperModals';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -132,5 +132,9 @@ export class ApiService {
 
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/users/delete/${id}`, { responseType: "text" as 'json' });
+  }
+
+  getLogs(): Observable<Log[]> {
+    return this.http.get<Log[]>(`${this.apiUrl}/logger/getLoggingDetails`);
   }
 }

@@ -28,5 +28,15 @@ export interface User {
   id: number,
   name: string,
   role: 'ADMIN' | 'USER',
-  post: string
+  rank: string,
+  firstName: string,
+  lastName: string,
+  armyNumber: string,
+  company: string,
+}
+
+export interface Log {
+  id: number,
+  detail: string,
+  updatedAt: string,
 }

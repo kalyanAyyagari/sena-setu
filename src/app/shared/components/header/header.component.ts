@@ -3,6 +3,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { IdleService } from '../../../core/services/idle.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class HeaderComponent {
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private idleService: IdleService
   ) { }
 
   isAuthPage(): boolean {
@@ -24,6 +26,7 @@ export class HeaderComponent {
   }
 
   logout(): void {
+    this.idleService.stopWatching();
     this.authService.logout();
     this.router.navigate(['/login']);
   }

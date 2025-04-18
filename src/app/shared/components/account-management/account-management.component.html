@@ -8,8 +8,12 @@
       @if (currentUser(); as user) {
       <div class="user-info">
         <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>First Name:</strong> {{ user.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ user.lastName }}</p>
+        <p><strong>Army Number:</strong> {{ user.armyNumber }}</p>
+        <p><strong>Company:</strong> {{ user.company }}</p>
+        <p><strong>Rank:</strong> {{ user.rank }}</p>
         <p><strong>Role:</strong> {{ user.role }}</p>
-        <p><strong>Post:</strong> {{ user.post }}</p>
       </div>
       }
     </mat-card-content>
@@ -18,61 +22,96 @@
   <!-- Admin Section -->
   @if (isAdmin()) {
   <div class="admin-section">
-    <h2>User Management</h2>
+    <mat-tab-group>
+      <mat-tab label="User Management">
+        <h2>User Management</h2>
 
-    <!-- Filter -->
-    <mat-form-field class="filter-field">
-      <mat-label>Search Users</mat-label>
-      <input matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
+        <!-- Filter -->
+        <mat-form-field class="filter-field">
+          <mat-label>Search Users</mat-label>
+          <input matInput (keyup)="applyFilter($event, 'users')" #input>
+        </mat-form-field>
 
-    <!-- Users Table with fixed header -->
-    <div class="table-container">
-      <table mat-table [dataSource]="users()" class="users-table mat-elevation-z3">
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let user">{{user.name}}</td>
-        </ng-container>
+        <!-- Users Table with fixed header -->
+        <div class="table-container">
+          <table mat-table [dataSource]="users()" class="users-table mat-elevation-z3">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let user">{{user.name}}</td>
+            </ng-container>
 
-        <!-- Role Column -->
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef> Role </th>
-          <td mat-cell *matCellDef="let user">{{user.role}}</td>
-        </ng-container>
+            <!-- Role Column -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef> Role </th>
+              <td mat-cell *matCellDef="let user">{{user.role}}</td>
+            </ng-container>
 
-        <!-- Post Column -->
-        <ng-container matColumnDef="post">
-          <th mat-header-cell *matHeaderCellDef> Post </th>
-          <td mat-cell *matCellDef="let user">{{user.post}}</td>
-        </ng-container>
+            <!-- Post Column -->
+            <ng-container matColumnDef="post">
+              <th mat-header-cell *matHeaderCellDef> Post </th>
+              <td mat-cell *matCellDef="let user">{{user.post}}</td>
+            </ng-container>
 
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef style="width: 40%;text-align: center;"> Actions </th>
-          <td mat-cell *matCellDef="let user">
-            <div class="justify-center">
-              @if (user.role !== 'ADMIN') {
-                <button mat-button color="primary" (click)="makeAdmin(user)" matTooltip="Make Admin">
-                  <mat-icon>admin_panel_settings</mat-icon>
-                  Make Admin
-                </button>
-              }
-              @else {
-                <span style="width: 7.5075rem;"></span>
-              }
-              <button mat-button color="warn" (click)="deleteUser(user)" matTooltip="Delete User">
-                <mat-icon>delete</mat-icon>
-                Delete User
-              </button>
-            </div>
-          </td>
-        </ng-container>
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef style="width: 40%;text-align: center;"> Actions </th>
+              <td mat-cell *matCellDef="let user">
+                <div class="justify-center">
+                  @if (user.role !== 'ADMIN') {
+                  <button mat-button color="primary" (click)="makeAdmin(user)" matTooltip="Make Admin">
+                    <mat-icon>admin_panel_settings</mat-icon>
+                    Make Admin
+                  </button>
+                  }
+                  @else {
+                  <span style="width: 7.5075rem;"></span>
+                  }
+                  <button mat-button color="warn" (click)="deleteUser(user)" matTooltip="Delete User">
+                    <mat-icon>delete</mat-icon>
+                    Delete User
+                  </button>
+                </div>
+              </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Logs">
+        <div class="logs-section">
+          <h2>Logs</h2>
+          <mat-form-field class="filter-field">
+            <mat-label>Search Logs</mat-label>
+            <input matInput (keyup)="applyFilter($event, 'logs')" #logInput>
+          </mat-form-field>
+          <div class="table-container">
+            <table mat-table [dataSource]="logs()" class="logs-table mat-elevation-z3">
+              <!-- Id Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let log">{{log.id}}</td>
+              </ng-container>
+              <!-- Detail Column -->
+              <ng-container matColumnDef="detail">
+                <th mat-header-cell *matHeaderCellDef> Detail </th>
+                <td mat-cell *matCellDef="let log">{{log.detail}}</td>
+              </ng-container>
+              <!-- UpdatedAt Column -->
+              <ng-container matColumnDef="updatedAt">
+                <th mat-header-cell *matHeaderCellDef> Updated At </th>
+                <td mat-cell *matCellDef="let log">{{log.updatedAt | date:'medium'}}</td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="['id', 'detail', 'updatedAt']; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: ['id', 'detail', 'updatedAt'];"></tr>
+            </table>
+          </div>
+          <mat-paginator [pageSize]="50" [pageSizeOptions]="[50]" showFirstLastButtons (page)="onLogsPageChange($event)"></mat-paginator>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
   }
 </div>

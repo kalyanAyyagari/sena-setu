@@ -40,7 +40,12 @@ export class LandingComponent {
   ) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      firstName: ['', Validators.required],
+      lastName: [''],
+      armyNumber: ['', Validators.required],
+      company: ['', Validators.required],
+      rank: ['', Validators.required]
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/units';
     this.loginForm = this.fb.group({

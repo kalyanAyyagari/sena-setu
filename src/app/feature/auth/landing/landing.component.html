@@ -45,6 +45,43 @@
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" required>
+                <mat-error *ngIf="signupForm.get('firstName')?.hasError('required')">
+                  First Name is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Army Number</mat-label>
+                <input matInput formControlName="armyNumber" required>
+                <mat-error *ngIf="signupForm.get('armyNumber')?.hasError('required')">
+                  Army Number is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Company</mat-label>
+                <input matInput formControlName="company" required>
+                <mat-error *ngIf="signupForm.get('company')?.hasError('required')">
+                  Company is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Rank</mat-label>
+                <input matInput formControlName="rank" required>
+                <mat-error *ngIf="signupForm.get('rank')?.hasError('required')">
+                  Rank is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Password</mat-label>
                 <input matInput type="password" formControlName="password" required>
                 <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
