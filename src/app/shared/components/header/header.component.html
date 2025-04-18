@@ -4,15 +4,17 @@
       <mat-icon>shopping_cart</mat-icon>
       SENA SETU
     </span>
-    <div class="ml-auto">
-      <button mat-button (click)="goToProfile()">
-        <mat-icon>account_circle</mat-icon>
-        Profile
-      </button>
-      <button mat-button color="warn" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        Log Out
-      </button>
-    </div>
+    @if (!isAuthPage()) {
+      <div class="ml-auto">
+        <button mat-button (click)="goToProfile()">
+          <mat-icon>account_circle</mat-icon>
+          Profile
+        </button>
+        <button mat-button color="warn" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Log Out
+        </button>
+      </div>
+    }
   </div>
 </div>

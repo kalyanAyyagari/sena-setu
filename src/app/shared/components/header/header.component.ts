@@ -7,16 +7,22 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule,MatIconModule],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
+
+  isAuthPage(): boolean {
+    const currentUrl = this.router.url;
+    return currentUrl.includes('/login') || currentUrl.includes('/signup');
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
