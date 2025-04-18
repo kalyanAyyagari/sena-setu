@@ -49,7 +49,6 @@ export class ViewSubProductsComponent {
       this.subproducts.set(new MatTableDataSource());
       this.apiService.getSubproductsByProductId(productId).subscribe({
         next: (response) => {
-          console.log(response);
           const dataSource = new MatTableDataSource(response);
           this.subproducts.set(dataSource);
         },
@@ -64,7 +63,6 @@ export class ViewSubProductsComponent {
       this.subproducts.set(new MatTableDataSource());
       this.apiService.getAllSubproducts().subscribe({
         next: (response: Subproduct[]) => {
-          console.log(response);
           const dataSource = new MatTableDataSource(response);
           this.subproducts.set(dataSource);
         },
@@ -75,16 +73,13 @@ export class ViewSubProductsComponent {
     }
     selectedSubproduct = signal<Subproduct>(this.getEmptySubproductObject());
     editSubproduct(subproduct: Subproduct) {
-      console.log('Edit subproduct with ID:', subproduct);
       this.selectedSubproduct.set(subproduct);
       this.addToggle.set(true);
     }
 
     deleteSubproduct(subproductId: string) {
-      console.log('Delete subproduct with ID:', subproductId);
       this.apiService.deleteSubproduct(subproductId).subscribe({
         next: (response) => {
-          console.log(response);
           this.snackBar.open("deleted successfully", 'Close', { duration: 5000 });
           this.getSubproductsByProductId(this.productId);
         },

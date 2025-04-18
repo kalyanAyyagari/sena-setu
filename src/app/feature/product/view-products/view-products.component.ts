@@ -47,7 +47,6 @@ export class ViewProductsComponent {
     this.products.set(new MatTableDataSource());
     this.apiService.getProductsByCompanyId(companyId).subscribe({
       next: (response) => {
-        console.log(response);
         const dataSource = new MatTableDataSource(response);
         this.products.set(dataSource);
       },
@@ -62,7 +61,6 @@ export class ViewProductsComponent {
     this.products.set(new MatTableDataSource());
     this.apiService.getAllProducts().subscribe({
       next: (response: Product[]) => {
-        console.log(response);
         const dataSource = new MatTableDataSource(response);
         this.products.set(dataSource);
       },
@@ -73,16 +71,13 @@ export class ViewProductsComponent {
   }
   selectedProduct = signal<Product>(this.getEmptyProductObject());
   editProduct(product: Product) {
-    console.log('Edit product with ID:', product);
     this.selectedProduct.set(product);
     this.addToggle.set(true);
   }
 
   deleteProduct(productId: string) {
-    console.log('Delete product with ID:', productId);
     this.apiService.deleteProduct(productId).subscribe({
       next: (response) => {
-        console.log(response);
         this.snackBar.open("deleted successfully", 'Close', { duration: 5000 });
         this.getProductsByCompanyId(this.companyId);
       },

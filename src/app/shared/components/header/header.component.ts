@@ -26,16 +26,13 @@ export class HeaderComponent {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
-    console.log('Logout clicked');
   }
 
   goToProfile(): void {
     this.router.navigate(['/account-management']);
-    console.log('Profile clicked');
   }
 
   goToUnits(): void {
     this.router.navigate(['/units']);
-    console.log('Units clicked');
   }
 }

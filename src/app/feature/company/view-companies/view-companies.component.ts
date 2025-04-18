@@ -45,7 +45,6 @@ export class ViewCompaniesComponent {
     this.companies.set(new MatTableDataSource());
     this.apiService.getCompaniesByUnitId(unitId).subscribe({
       next: (response) => {
-        console.log(response);
         const dataSource = new MatTableDataSource(response);
         this.companies.set(dataSource);
       },
@@ -60,7 +59,6 @@ export class ViewCompaniesComponent {
     this.companies.set(new MatTableDataSource());
     this.apiService.getAllCompanies().subscribe({
       next: (response: Company[]) => {
-        console.log(response);
         const dataSource = new MatTableDataSource(response);
         this.companies.set(dataSource);
       },
@@ -71,16 +69,13 @@ export class ViewCompaniesComponent {
   }
   selectedCompany = signal<Company>(this.getEmptyCompanyObject());
   editCompany(company: Company) {
-    console.log('Edit company with ID:', company);
     this.selectedCompany.set(company);
     this.addToggle.set(true);
   }
 
   deleteCompany(companyId: string) {
-    console.log('Delete company with ID:', companyId);
     this.apiService.deleteCompany(companyId).subscribe({
       next: (response) => {
-        console.log(response);
         this.snackBar.open("deleted successfully", 'Close', { duration: 5000 });
         this.getCompaniesByUnitId(this.unitId);
       },

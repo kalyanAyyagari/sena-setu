@@ -48,10 +48,8 @@ export class AddCompanyComponent {
 
   onAdd(): void {
     if (this.addCompanyForm.invalid) return;
-    console.log(this.addCompanyForm.value);
     this.apiService.createCompany(this.unitId(), this.addCompanyForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         this.snackBar.open("Added successfully", 'Close', { duration: 5000 });
         this.reloadList.emit();
       },
@@ -64,10 +62,8 @@ export class AddCompanyComponent {
 
   onEdit(): void {
     if (this.addCompanyForm.invalid) return;
-    console.log(this.addCompanyForm.value);
     this.apiService.updateCompany(this.unitId(), this.selectedCompany()?.id, this.addCompanyForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         this.snackBar.open("updated successfully", 'Close', { duration: 5000 });
         this.reloadList.emit();
       },

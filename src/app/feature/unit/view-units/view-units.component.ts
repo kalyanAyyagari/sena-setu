@@ -45,7 +45,6 @@ export class ViewUnitsComponent {
     this.units.set(new MatTableDataSource());
     this.apiService.getAllUnits().subscribe({
       next: (response: Unit[]) => {
-        console.log(response);
         const dataSource = new MatTableDataSource(response);
         this.units.set(dataSource);
       },
@@ -56,16 +55,13 @@ export class ViewUnitsComponent {
   }
   selectedUnit = signal<Unit>({ id: '', name: '', description: '', companyList: [] });
   editUnit(unit: Unit) {
-    console.log('Edit unit with ID:', unit);
     this.selectedUnit.set(unit);
     this.addToggle.set(true);
   }
 
   deleteUnit(unitId: string) {
-    console.log('Delete unit with ID:', unitId);
     this.apiService.deleteUnit(unitId).subscribe({
       next: (response) => {
-        console.log(response);
         this.snackBar.open("Unit deleted successfully", 'Close', { duration: 5000 });
         this.getAllUnits();
       },

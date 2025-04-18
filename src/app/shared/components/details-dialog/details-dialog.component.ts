@@ -27,7 +27,6 @@ export class DetailsDialogComponent {
     if (this.data.barcode) {
       this.apiService.getBarcodeImage(this.data.barcode).subscribe({
         next: (response: any) => {
-          console.log(response);
           const blob = new Blob([response], { type: 'image/png' });
           const url = URL.createObjectURL(blob);
           const imgElement = document.createElement('img');

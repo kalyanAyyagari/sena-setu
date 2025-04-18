@@ -22,7 +22,7 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem(this.tokenKey); // Replace 'token' with your JWT key
-    localStorage.removeItem('user'); // Optional: Remove additional user data
+    sessionStorage.removeItem('user'); // Optional: Remove additional user data
   }
   // Retrieve the JWT token.
   getToken(): string | null {

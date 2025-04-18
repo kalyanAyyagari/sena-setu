@@ -48,10 +48,8 @@ export class AddProductComponent {
 
   onAdd(): void {
     if (this.addProductForm.invalid) return;
-    console.log(this.addProductForm.value);
     this.apiService.createProduct(this.companyId(), this.addProductForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         this.snackBar.open("Added successfully", 'Close', { duration: 5000 });
         this.reloadList.emit();
       },
@@ -64,10 +62,8 @@ export class AddProductComponent {
 
   onEdit(): void {
     if (this.addProductForm.invalid) return;
-    console.log(this.addProductForm.value);
     this.apiService.updateProduct(this.companyId(), this.selectedProduct()?.id, this.addProductForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         this.snackBar.open("updated successfully", 'Close', { duration: 5000 });
         this.reloadList.emit();
       },
