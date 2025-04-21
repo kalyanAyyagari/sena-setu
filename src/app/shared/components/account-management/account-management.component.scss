@@ -6,7 +6,7 @@
   margin: 0 auto;
 
   .profile-card {
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -30,6 +30,10 @@
       p {
         margin: 0.5rem 0;
         font-size: 1.1rem;
+
+        strong {
+          color: #2c3507;
+        }
       }
     }
 
@@ -53,7 +57,7 @@
   .admin-section {
     h2 {
       margin-bottom: 1rem;
-      color: #4b5320;
+      color: #1f2605;
     }
 
     .filter-field {
@@ -62,39 +66,35 @@
     }
   }
 
-  // .table-container {
-  //   height: 400px;
-  //   overflow: auto;
-  //   border-radius: 4px;
+  .table-container {
+    .mat-mdc-header-row {
+      position: sticky;
+      top: 0;
+      background-color: #37440a;
+      z-index: 10;
+      border-bottom: 2px solid #e0e0e0;
+      min-height: 56px;
+      color: #e0e0c7;
+    }
 
-  //   .users-table {
-  //     width: 100%;
-  //   }
+    .mat-mdc-header-cell {
+      font-weight: 600;
+      // color: #333;
+      padding: 0 16px;
+    }
 
-  //   .mat-mdc-header-row {
-  //     position: sticky;
-  //     top: 0;
-  //     background-color: #37440a;
-  //     z-index: 10;
-  //     border-bottom: 2px solid #e0e0e0;
-  //     min-height: 56px;
-  //     color: #e0e0c7;
-  //   }
+    .mat-mdc-row:nth-child(even) {
+      background-color: #fafafa;
+    }
 
-  //   .mat-mdc-header-cell {
-  //     font-weight: 600;
-  //     // color: #333;
-  //     padding: 0 16px;
-  //   }
+    .mat-mdc-row:hover {
+      background-color: #f0f0f0;
+    }
 
-  //   .mat-mdc-row:nth-child(even) {
-  //     background-color: #fafafa;
-  //   }
-
-  //   .mat-mdc-row:hover {
-  //     background-color: #f0f0f0;
-  //   }
-  // }
+    .mat-mdc-row {
+      color: #1f2605;
+    }
+  }
 
   .filter-field {
     width: 100%;

@@ -1,0 +1,62 @@
+.not-found-container {
+  height: calc(100vh - 120px); // Account for header and padding
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+
+  .content {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .large-icon {
+    font-size: 64px;
+    height: 64px;
+    width: 64px;
+    color: #1f2605;  // Dark military green
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 5rem;
+    margin: 0;
+    color: #1f2605;  // Dark military green
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin: 0;
+    color: #2c3507;  // Slightly lighter dark green
+    font-weight: 500;
+  }
+
+  p {
+    color: #37440a;  // Even lighter dark green for better readability
+    font-size: 1.1rem;
+    margin: 1rem 0 2rem;
+    opacity: 0.9;
+  }
+
+  button {
+    min-width: 200px;
+    font-weight: 500;
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}

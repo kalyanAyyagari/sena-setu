@@ -57,17 +57,39 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: #023d09;
+  color: #1f2605; // Darker text color for better contrast
 }
 
 // Override Material styles for frosted glass effect
 .mat-mdc-form-field-appearance-fill .mat-mdc-text-field-wrapper {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2); // Slightly more opaque background
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
 
-// Add these new styles
+// Global text color overrides for better contrast
+.profile-card, .mat-mdc-card {
+  .user-info, .mat-mdc-card-content {
+    color: #1f2605;
+  }
+}
+
+.table-container {
+  .mat-mdc-cell {
+    color: #1f2605;
+  }
+}
+
+// Make form field labels and input text darker
+.mat-mdc-form-field {
+  .mat-mdc-input-element {
+    color: #1f2605 !important;
+  }
+  .mat-mdc-form-field-label {
+    color: #2c3507 !important;
+  }
+}
+
 .app-root {
   display: flex;
   flex-direction: column;
@@ -148,10 +170,6 @@ body {
   overflow: auto;
   border-radius: 4px;
 
-  // .users-table {
-  //   width: 100%;
-  // }
-
   .mat-mdc-header-row {
     position: sticky;
     top: 0;
@@ -165,7 +183,6 @@ body {
 
   .mat-mdc-header-cell {
     font-weight: 600;
-    // color: #333;
     padding: 0 16px;
   }
 
