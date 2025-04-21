@@ -49,11 +49,11 @@ export class AddUnitComponent {
     if (this.addUnitForm.invalid) return;
     this.apiService.createUnit(this.addUnitForm.value).subscribe({
       next: (response) => {
-        this.snackBar.open("Unit created successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("Unit created successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating the unit', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating the unit', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
     this.addUnitForm.reset();
@@ -63,11 +63,11 @@ export class AddUnitComponent {
     if (this.addUnitForm.invalid) return;
     this.apiService.updateUnit(this.selectedUnit()?.id, this.addUnitForm.value).subscribe({
       next: (response) => {
-        this.snackBar.open("Unit updated successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("Unit updated successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating the unit', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating the unit', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
     this.addUnitForm.reset();

@@ -52,7 +52,7 @@ export class ViewProductsComponent {
       },
       error: (error) => {
         console.error(error);
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while fetching', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while fetching', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
   }
@@ -78,11 +78,11 @@ export class ViewProductsComponent {
   deleteProduct(productId: string) {
     this.apiService.deleteProduct(productId).subscribe({
       next: (response) => {
-        this.snackBar.open("deleted successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("deleted successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.getProductsByCompanyId(this.companyId);
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       },
     })
   }

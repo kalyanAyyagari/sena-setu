@@ -34,6 +34,7 @@ export class IdleService {
         this.authService.logout();
         this.snackBar.open('logged out due to inactivity', 'Close', {
           duration: 0,
+          panelClass: 'error-snackbar'
         });
         this.router.navigate(['/login']);
       });

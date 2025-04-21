@@ -50,11 +50,11 @@ export class AddProductComponent {
     if (this.addProductForm.invalid) return;
     this.apiService.createProduct(this.companyId(), this.addProductForm.value).subscribe({
       next: (response) => {
-        this.snackBar.open("Added successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("Added successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while Adding', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while Adding', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
     this.addProductForm.reset();
@@ -64,11 +64,11 @@ export class AddProductComponent {
     if (this.addProductForm.invalid) return;
     this.apiService.updateProduct(this.companyId(), this.selectedProduct()?.id, this.addProductForm.value).subscribe({
       next: (response) => {
-        this.snackBar.open("updated successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("updated successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
     this.addProductForm.reset();

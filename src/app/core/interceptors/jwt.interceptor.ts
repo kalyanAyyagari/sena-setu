@@ -26,7 +26,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
         error?.message === 'Token has expired. Please login again.'
       ) {
         authService.logout();
-        snackBar.open('Session expired. Please login again.', 'Close', { duration: 5000 });
+        snackBar.open('Session expired. Please login again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
         router.navigate(['/login']);
       }
       throw error;

@@ -50,7 +50,7 @@ export class ViewCompaniesComponent {
       },
       error: (error) => {
         console.error(error);
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while fetching', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while fetching', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
   }
@@ -76,11 +76,11 @@ export class ViewCompaniesComponent {
   deleteCompany(companyId: string) {
     this.apiService.deleteCompany(companyId).subscribe({
       next: (response) => {
-        this.snackBar.open("deleted successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("deleted successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.getCompaniesByUnitId(this.unitId);
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       },
     })
   }

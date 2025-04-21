@@ -12,8 +12,7 @@ $military-green: (
   700: #37440a,
   800: #2c3507,
   900: #1f2605,
-  contrast: (
-    50: #1f2605,
+  contrast: (50: #1f2605,
     100: #1f2605,
     200: #1f2605,
     300: #fff,
@@ -30,17 +29,16 @@ $primary: mat.m2-define-palette($military-green, 500, 300, 700);
 $accent: mat.m2-define-palette(mat.$m2-lime-palette, 600, 300, 900);
 $warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-$theme: mat.m2-define-light-theme((
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn,
-  ),
-));
+$theme: mat.m2-define-light-theme((color: (primary: $primary,
+        accent: $accent,
+        warn: $warn,
+      ),
+    ));
 
 @include mat.all-component-themes($theme);
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -52,11 +50,10 @@ body {
   background-image:
     linear-gradient(135deg, #4b5320 0%, #1f2605 100%),
     repeating-linear-gradient(45deg,
-      rgba(255,255,255,0.05) 0px,
-      rgba(255,255,255,0.05) 2px,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.05) 2px,
       transparent 2px,
-      transparent 8px
-    );
+      transparent 8px);
   min-height: 100vh;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -78,7 +75,7 @@ body {
   width: 100vw;
 }
 
-.addButton{
+.addButton {
   border-radius: 3px !important;
   height: 56px !important;
   margin-bottom: 20px !important;
@@ -88,52 +85,54 @@ body {
   box-sizing: border-box;
 }
 
-.flex{
+.flex {
   display: flex;
 }
-.flex-column{
+
+.flex-column {
   display: flex;
   flex-direction: column;
 }
 
-.justify-center{
+.justify-center {
   display: flex;
   justify-content: center;
 }
 
-.align-center{
+.align-center {
   display: flex;
   align-items: center;
 }
 
-.flex-center{
+.flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.p-1{
+.p-1 {
   padding: 1%;
 }
 
-.form-container{
+.form-container {
   margin: 0 auto;
   width: 60%;
   min-width: 335px;
 }
-.gap-1rem{
+
+.gap-1rem {
   gap: 1rem;
 }
 
-.ml-auto{
+.ml-auto {
   margin-left: auto;
 }
 
-.width-full{
+.width-full {
   width: 100%;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
@@ -154,7 +153,7 @@ body {
     border-bottom: 2px solid #e0e0e0;
     min-height: 56px;
     color: #e0e0c7;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   .mat-mdc-header-cell {
@@ -170,4 +169,21 @@ body {
   .mat-mdc-row:hover {
     background-color: #f0f0f0;
   }
+}
+
+.error-snackbar {
+  background: #931717 !important;
+  color: #fff !important;
+  border-radius: 5px;
+}
+
+.success-snackbar {
+  background: #017106 !important;
+  color: #fff !important;
+  border-radius: 5px;
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+  color: unset !important;
+  background: unset !important;
 }

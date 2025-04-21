@@ -50,11 +50,11 @@ export class AddCompanyComponent {
     if (this.addCompanyForm.invalid) return;
     this.apiService.createCompany(this.unitId(), this.addCompanyForm.value).subscribe({
       next: (response) => {
-        this.snackBar.open("Added successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("Added successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while Adding', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while Adding', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
     this.addCompanyForm.reset();
@@ -64,11 +64,11 @@ export class AddCompanyComponent {
     if (this.addCompanyForm.invalid) return;
     this.apiService.updateCompany(this.unitId(), this.selectedCompany()?.id, this.addCompanyForm.value).subscribe({
       next: (response) => {
-        this.snackBar.open("updated successfully", 'Close', { duration: 5000 });
+        this.snackBar.open("updated successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while updating', 'Close', { duration: 500000, panelClass: 'error-snackbar' });
       }
     })
     this.addCompanyForm.reset();

@@ -59,12 +59,12 @@ export class LandingComponent {
 
     this.authService.signup(this.signupForm.value).subscribe({
       next: (response) => {
-        this.snackBar.open('Account created successfully!', 'Close', { duration: 3000 });
+        this.snackBar.open('Account created successfully!', 'Close', { duration: 3000, panelClass: 'success-snackbar' });
         this.selectedTabIndex.set(0);
         this.signupForm.reset();
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred during signup', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred during signup', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       },
     });
   }
@@ -76,11 +76,11 @@ export class LandingComponent {
       next: (response) => {
         this.authService.setToken(response.token);
         this.authService.setUser(response);
-        this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+        this.snackBar.open('Login successful!', 'Close', { duration: 3000, panelClass: 'success-snackbar' });
         this.router.navigateByUrl(this.returnUrl);
       },
       error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred during login', 'Close', { duration: 5000 });
+        this.snackBar.open(error?.error?.message ?? 'An error occurred during login', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       },
     });
   }
