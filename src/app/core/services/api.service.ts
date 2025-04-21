@@ -101,8 +101,8 @@ export class ApiService {
     return this.http.post<Subproduct>(`${this.apiUrl}/sub-products/product/${productId}`, subproduct);
   }
 
-  updateSubproduct(productId: string, subproductId: string, subproduct: Partial<Subproduct>): Observable<Subproduct> {
-    return this.http.put<Subproduct>(`${this.apiUrl}/sub-products/${subproductId}/product/${productId}`, subproduct);
+  updateSubproduct(productId: string, subproductId: string, subproduct: Partial<Subproduct>, isQuantityOnlyUpdate: boolean): Observable<Subproduct> {
+    return this.http.put<Subproduct>(`${this.apiUrl}/sub-products/${subproductId}/product/${productId}?isQuantityUpdate=${isQuantityOnlyUpdate}`, subproduct);
   }
 
   deleteSubproduct(id: string): Observable<string> {
@@ -134,8 +134,8 @@ export class ApiService {
     return this.http.delete<void>(`${this.apiUrl}/users/delete/${id}`, { responseType: "text" as 'json' });
   }
 
-  getLogs(): Observable<Log[]> {
-    return this.http.get<Log[]>(`${this.apiUrl}/logger/getLoggingDetails`);
+  getLogs(pageNumber: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/logger/getLoggingDetails?page=${pageNumber}`);
   }
 
   getGlobalSearchResults(searchTerm: string): Observable<any[]> {

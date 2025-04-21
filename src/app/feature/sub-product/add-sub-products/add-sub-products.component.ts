@@ -63,8 +63,13 @@ export class AddSubProductsComponent {
   }
 
   onEdit(): void {
+    let isQuantityOnlyUpdate = false;
     if (this.addSubproductForm.invalid) return;
-    this.apiService.updateSubproduct(this.productId(), this.selectedSubproduct()?.id, this.addSubproductForm.value).subscribe({
+    if(this.selectedSubproduct()?.name===this.addSubproductForm.value.name &&
+    this.selectedSubproduct()?.quantity!==this.addSubproductForm.value.quantity) {
+      isQuantityOnlyUpdate = true;
+    };
+    this.apiService.updateSubproduct(this.productId(), this.selectedSubproduct()?.id, this.addSubproductForm.value, isQuantityOnlyUpdate).subscribe({
       next: (response) => {
         this.snackBar.open("updated successfully", 'Close', { duration: 5000 });
         this.reloadList.emit();

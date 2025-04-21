@@ -31,13 +31,15 @@ export class AccountManagementComponent {
   private authService = inject(AuthService);
   private snackBar = inject(MatSnackBar);
 
-  displayedColumns = ['name', 'role', 'rank','armyNumber', 'company', 'actions'];
-  // users = signal<User[]>([]);
+  displayedColumns = ['name', 'role', 'rank', 'armyNumber', 'company', 'actions'];
   users = signal(new MatTableDataSource<User>());
   logs = signal(new MatTableDataSource<Log>());
   @ViewChild(MatPaginator) logsPaginator!: MatPaginator;
   currentUser = signal<User | null>(null);
   filterValue = signal('');
+
+  // Add a signal to store total log count for paginator
+  logsTotalCount = signal(0);
 
   isAdmin = computed(() => this.currentUser()?.role === 'ADMIN');
 
@@ -63,10 +65,15 @@ export class AccountManagementComponent {
       });
     }
   }
-  private loadLogs(): void {
+  private loadLogs(pageNumber: number = 0): void {
     if (this.isAdmin()) {
-      this.apiService.getLogs().subscribe({
-        next: (logs) => this.logs.set(new MatTableDataSource(logs)),
+      this.apiService.getLogs(pageNumber).subscribe({
+        next: (logs) => {
+          this.logs.set(new MatTableDataSource(logs?.content));
+          this.logsTotalCount.set(logs?.totalItems || 0);
+          this.logsPaginator.length = logs?.totalItems;
+          this.logsPaginator.pageIndex = logs?.currentPage;
+        },
         error: (error) => this.showError('Failed to load logs')
       });
     }
@@ -78,6 +85,7 @@ export class AccountManagementComponent {
   }
 
   onLogsPageChange(event: any) {
+    this.loadLogs(event.pageIndex);
     this.logs().paginator = this.logsPaginator;
   }
 
@@ -106,17 +114,10 @@ export class AccountManagementComponent {
   }
 
   private showSuccess(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000, horizontalPosition: 'center',
-      verticalPosition: 'top'
-    });
+    this.snackBar.open(message, 'Close', { duration: 3000, });
   }
 
   private showError(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 5000, panelClass: 'error-snackbar',
-      horizontalPosition: 'center',
-      verticalPosition: 'top'
-    });
+    this.snackBar.open(message, 'Close', { duration: 5000, panelClass: 'error-snackbar', });
   }
 }

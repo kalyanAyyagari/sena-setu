@@ -120,7 +120,7 @@
               <tr mat-row *matRowDef="let row; columns: ['id', 'detail', 'updatedAt'];"></tr>
             </table>
           </div>
-          <mat-paginator [pageSize]="50" [pageSizeOptions]="[50]" showFirstLastButtons (page)="onLogsPageChange($event)"></mat-paginator>
+          <mat-paginator [pageSize]="50" [pageSizeOptions]="[50]" [length]="logsTotalCount()" showFirstLastButtons (page)="onLogsPageChange($event)"></mat-paginator>
         </div>
       </mat-tab>
     </mat-tab-group>
