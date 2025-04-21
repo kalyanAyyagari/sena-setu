@@ -60,15 +60,17 @@ export class ViewUnitsComponent {
   }
 
   deleteUnit(unitId: string) {
-    this.apiService.deleteUnit(unitId).subscribe({
-      next: (response) => {
-        this.snackBar.open("Unit deleted successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
-        this.getAllUnits();
-      },
-      error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting the unit', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
-      },
-    })
+    if (confirm(`Are you sure you want to delete`)) {
+      this.apiService.deleteUnit(unitId).subscribe({
+        next: (response) => {
+          this.snackBar.open("Unit deleted successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
+          this.getAllUnits();
+        },
+        error: (error) => {
+          this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting the unit', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+        },
+      })
+    }
   }
   reloadList() {
     this.selectedUnit.set({ id: '', name: '', description: '', companyList: [] });

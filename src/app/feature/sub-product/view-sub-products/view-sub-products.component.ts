@@ -78,15 +78,17 @@ export class ViewSubProductsComponent {
   }
 
   deleteSubproduct(subproductId: string) {
-    this.apiService.deleteSubproduct(subproductId).subscribe({
-      next: (response) => {
-        this.snackBar.open("deleted successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
-        this.getSubproductsByProductId(this.productId);
-      },
-      error: (error) => {
-        this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
-      },
-    })
+    if (confirm(`Are you sure you want to delete`)) {
+      this.apiService.deleteSubproduct(subproductId).subscribe({
+        next: (response) => {
+          this.snackBar.open("deleted successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
+          this.getSubproductsByProductId(this.productId);
+        },
+        error: (error) => {
+          this.snackBar.open(error?.error?.message ?? 'An error occurred while deleting', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+        },
+      })
+    }
   }
   reloadList() {
     this.selectedSubproduct.set(this.getEmptySubproductObject());
