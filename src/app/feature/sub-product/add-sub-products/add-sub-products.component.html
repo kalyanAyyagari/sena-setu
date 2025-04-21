@@ -1,6 +1,6 @@
 <div class="p-1">
   <div class="form-container">
-    <h2>ADD SUB PRODUCTS</h2>
+    <h2 class="font-500">{{selectedSubproduct().id?'UPDATE SUB PRODUCT':'ADD SUB PRODUCTS'}}</h2>
     <form [formGroup]="addSubproductForm" class="flex-column gap-1rem">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Name</mat-label>

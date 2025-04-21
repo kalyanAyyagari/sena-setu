@@ -1,6 +1,6 @@
 <div class="p-1">
   <div class="form-container">
-    <h2>ADD COMPANIES</h2>
+    <h2 class="font-500">{{selectedCompany().id?'UPDATE COMPANY':'ADD COMPANIES'}}</h2>
     <form [formGroup]="addCompanyForm" class="flex-column gap-1rem">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Name</mat-label>
