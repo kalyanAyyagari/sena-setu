@@ -4,17 +4,137 @@
     <mat-card-header>
       <mat-card-title>Profile Information</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="p-1rem" >
       @if (currentUser(); as user) {
-      <div class="user-info">
-        <p><strong>Name:</strong> {{ user.name }}</p>
-        <p><strong>First Name:</strong> {{ user.firstName }}</p>
-        <p><strong>Last Name:</strong> {{ user.lastName }}</p>
-        <p><strong>Army Number:</strong> {{ user.armyNumber }}</p>
-        <p><strong>Company:</strong> {{ user.company }}</p>
-        <p><strong>Rank:</strong> {{ user.rank }}</p>
-        <p><strong>Role:</strong> {{ user.role }}</p>
-      </div>
+      @switch (editMode()) {
+        @case ('None') {
+          <div class="user-info">
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>First Name:</strong> {{ user.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ user.lastName }}</p>
+            <p><strong>Army Number:</strong> {{ user.armyNumber }}</p>
+            <p><strong>Company:</strong> {{ user.company }}</p>
+            <p><strong>Rank:</strong> {{ user.rank }}</p>
+            <p><strong>Role:</strong> {{ user.role }}</p>
+            <div class="action-buttons">
+              <button mat-button color="primary" (click)="startEditing()">
+                <mat-icon>edit</mat-icon>
+                Edit Profile
+              </button>
+              <button mat-button color="accent" (click)="startPasswordEdit()">
+                <mat-icon>lock</mat-icon>
+                Change Password
+              </button>
+              @if (isAdmin()) {
+              <button mat-button color="warn" (click)="deleteUser(user,true)">
+                <mat-icon>delete</mat-icon>
+                Delete Profile
+              </button>
+              }
+            </div>
+          </div>
+        }
+        @case ('Password') {
+          <form [formGroup]="changePasswordForm" (ngSubmit)="savePasswordEdit()" class="edit-form">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Current Password</mat-label>
+              <input matInput type="password" formControlName="oldPassword" required>
+              <mat-error *ngIf="changePasswordForm.get('oldPassword')?.hasError('required')">
+                Current password is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>New Password</mat-label>
+              <input matInput type="password" formControlName="newPassword" required>
+              <mat-error *ngIf="changePasswordForm.get('newPassword')?.hasError('required')">
+                New password is required
+              </mat-error>
+              <mat-error *ngIf="changePasswordForm.get('newPassword')?.hasError('minlength')">
+                Password must be at least 6 characters long
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Confirm New Password</mat-label>
+              <input matInput type="password" formControlName="confirmPassword" required>
+              <mat-error *ngIf="changePasswordForm.get('confirmPassword')?.hasError('required')">
+                Please confirm your new password
+              </mat-error>
+              <mat-error *ngIf="changePasswordForm.hasError('passwordsMismatch')">
+                Passwords do not match
+              </mat-error>
+            </mat-form-field>
+
+            <div class="action-buttons">
+              <button mat-raised-button color="primary" type="submit"
+                [disabled]="changePasswordForm.invalid">
+                Update Password
+              </button>
+              <button mat-button type="button" (click)="cancelPasswordEdit()">
+                Cancel
+              </button>
+            </div>
+          </form>
+        }
+        @case ('Edit') {
+          <form [formGroup]="editUserForm" (ngSubmit)="saveUserEdit()" class="edit-form">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" required>
+              <mat-error *ngIf="editUserForm.get('name')?.hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" required>
+              <mat-error *ngIf="editUserForm.get('firstName')?.hasError('required')">
+                First Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Army Number</mat-label>
+              <input matInput formControlName="armyNumber" required>
+              <mat-error *ngIf="editUserForm.get('armyNumber')?.hasError('required')">
+                Army Number is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Company</mat-label>
+              <input matInput formControlName="company" required>
+              <mat-error *ngIf="editUserForm.get('company')?.hasError('required')">
+                Company is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Rank</mat-label>
+              <input matInput formControlName="rank" required>
+              <mat-error *ngIf="editUserForm.get('rank')?.hasError('required')">
+                Rank is required
+              </mat-error>
+            </mat-form-field>
+
+            <div class="action-buttons">
+              <button mat-raised-button color="primary" type="submit" [disabled]="editUserForm.invalid">
+                Save Changes
+              </button>
+              <button mat-button type="button" (click)="cancelEdit()">
+                Cancel
+              </button>
+            </div>
+          </form>
+        }
+      }
       }
     </mat-card-content>
   </mat-card>

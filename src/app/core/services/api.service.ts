@@ -26,6 +26,10 @@ export class ApiService {
     return this.http.get<Unit[]>(`${this.apiUrl}/units/getAll`);
   }
 
+  getUnit(id: string): Observable<Unit> {
+    return this.http.get<Unit>(`${this.apiUrl}/units/get/${id}`);
+  }
+
   createUnit(unit: Partial<Unit>): Observable<Unit> {
     return this.http.post<Unit>(`${this.apiUrl}/units/create`, unit);
   }
@@ -41,6 +45,10 @@ export class ApiService {
   // Company CRUD operations
   getAllCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(`${this.apiUrl}/companies/getAll`);
+  }
+
+  getCompany(id: string): Observable<Company> {
+    return this.http.get<Company>(`${this.apiUrl}/companies/get/${id}`);
   }
 
   getCompaniesByUnitId(id: string): Observable<Company[]> {
