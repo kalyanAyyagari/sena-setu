@@ -113,7 +113,7 @@ export class BreadcrumbComponent {
       }
       // Skip the generic labels and only add IDs if entity names can't be fetched
       else if (i === 1 || i === 3 || i === 5) {
-        breadcrumbs.push({ label: segment, url: currentUrl });
+        breadcrumbs.push({ label: segment, url: currentUrl + '/' + urlSegments[i + 1] });
       }
     }
 
