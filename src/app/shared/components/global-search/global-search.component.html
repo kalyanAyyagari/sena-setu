@@ -6,11 +6,26 @@
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event.option.value)">
     @for (option of searchOptions(); track $index) {
     <mat-option [value]="option">
-      <div class="flex gap-1rem">
+      <div class="align-center gap-1rem">
         <mat-icon >search</mat-icon>
-        <span>{{option.type}}</span>
-        <mat-icon>arrow_forward</mat-icon>
-        {{option.name}}
+        <div class="flex-column">
+          <div class="flex gap-1rem align-center">
+            <span>{{option.type}}</span>
+            <mat-icon>arrow_forward</mat-icon>
+            {{option.name}}
+          </div>
+          <div class="align-center font-14px" >
+            @if(option.unitName){
+              <small>Unit: {{option.unitName}}</small>
+            }
+            @if(option.companyName){
+              <small>| Company: {{option.companyName}}</small>
+            }
+            @if(option.productName){
+              <small>| Product: {{option.productName}}</small>
+            }
+          </div>
+        </div>
       </div>
     </mat-option>
     }
