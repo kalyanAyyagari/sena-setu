@@ -48,8 +48,8 @@ export class ViewUnitsComponent {
         const dataSource = new MatTableDataSource(response);
         this.units.set(dataSource);
       },
-      error: (err) => {
-        console.error(err);
+      error: (error) => {
+        this.snackBar.open(error?.error?.message ?? 'An error occurred while fetching units', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       },
     })
   }
