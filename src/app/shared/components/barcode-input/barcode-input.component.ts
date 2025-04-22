@@ -29,19 +29,22 @@ export class BarcodeInputComponent {
 
     this.apiService.getDetailsByBarcode(barcode.trim()).subscribe({
       next: (response) => {
-        // Extract the first company and first product that contains the subproduct
         const unit = response;
         const company = unit?.companyList?.[0];
         const product = company?.productList?.[0];
         const subproduct = product?.subProductList?.[0];
 
         if (unit?.id && company?.id && product?.id && subproduct) {
-          // Create the URL
+          // Create the URL with query parameter
           const url = `/units/${unit.id}/companies/${company.id}/products/${product.id}/subproducts`;
 
-          // Force reload by first navigating to a dummy route then back
+          // Force reload by first navigating to a dummy route then back with query params
           this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this.router.navigateByUrl(url);
+            this.router.navigate([url], {
+              queryParams: {
+                filter: subproduct.barcode
+              }
+            });
           });
         } else {
           this.snackBar.open('Unable to locate the complete path for this subproduct', 'Close',

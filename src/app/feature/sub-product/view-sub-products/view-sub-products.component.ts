@@ -10,11 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { ViewTableComponent } from '../../../shared/components/view-table/view-table.component';
 import { AddSubProductsComponent } from '../add-sub-products/add-sub-products.component';
 import { BarcodeInputComponent } from "../../../shared/components/barcode-input/barcode-input.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-sub-products',
   standalone: true,
-  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule, ViewTableComponent, AddSubProductsComponent, BarcodeInputComponent],
+  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule,
+    ViewTableComponent, AddSubProductsComponent, BarcodeInputComponent, FormsModule],
   templateUrl: './view-sub-products.component.html',
   styleUrl: './view-sub-products.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -25,6 +27,7 @@ export class ViewSubProductsComponent {
   productId: string = '';
   subproducts = signal(new MatTableDataSource<Subproduct>());
   addToggle = signal(false);
+  filterValue = signal('');
 
   cols = [
     { name: 'Subproduct', value: 'name' },
@@ -41,14 +44,22 @@ export class ViewSubProductsComponent {
     this.unitId = this.route.snapshot.paramMap.get('unitId') as string;
     this.companyId = this.route.snapshot.paramMap.get('companyId') as string;
     this.productId = this.route.snapshot.paramMap.get('productId') as string;
-    this.getSubproductsByProductId(this.productId);
-   }
 
-  getSubproductsByProductId(productId: string) {
+    // Subscribe to query params to handle filtering
+    this.route.queryParams.subscribe(params => {
+      this.getSubproductsByProductId(this.productId, params['filter']);
+    });
+  }
+
+  getSubproductsByProductId(productId: string, filterValue?: string | undefined) {
     this.subproducts.set(new MatTableDataSource());
     this.apiService.getSubproductsByProductId(productId).subscribe({
       next: (response) => {
         const dataSource = new MatTableDataSource(response);
+        if (filterValue) {
+          dataSource.filter = filterValue.toLowerCase();
+          this.filterValue.set(filterValue);
+        }
         this.subproducts.set(dataSource);
       },
       error: (error) => {

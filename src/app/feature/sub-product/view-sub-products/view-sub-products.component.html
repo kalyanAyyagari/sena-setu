@@ -4,7 +4,7 @@
       <div class="flex gap-1rem">
         <mat-form-field>
           <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
+          <input matInput [(ngModel)]="filterValue" (keyup)="applyFilter($event)" placeholder="SEARCH" #input>
         </mat-form-field>
         <button class="addButton" mat-flat-button disableRipple="true" color="primary" (click)="addToggle.set(!addToggle())">
           <mat-icon>add</mat-icon>
