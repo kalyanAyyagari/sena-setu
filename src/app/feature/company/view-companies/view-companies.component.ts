@@ -9,11 +9,12 @@ import { Company } from '../../../core/models/helperModals';
 import { ApiService } from '../../../core/services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BarcodeInputComponent } from "../../../shared/components/barcode-input/barcode-input.component";
 
 @Component({
   selector: 'app-view-companies',
   standalone: true,
-  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule, ViewTableComponent, AddCompanyComponent],
+  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule, ViewTableComponent, AddCompanyComponent, BarcodeInputComponent],
   templateUrl: './view-companies.component.html',
   styleUrl: './view-companies.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -12,6 +12,7 @@
             ADD Company
           </button>
         }
+        <app-barcode-input class="ml-auto"></app-barcode-input>
       </div>
       <div class="company-Columns">
         <app-view-table class="cols" [dataSource]="companies()" [cols]="cols" [editOrDeleteAcess]="editOrDeleteAcess" (editItem)="editCompany($event)"

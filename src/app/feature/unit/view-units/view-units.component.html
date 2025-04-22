@@ -12,6 +12,7 @@
             ADD Unit
           </button>
         }
+        <app-barcode-input class="ml-auto"></app-barcode-input>
       </div>
       <div class="unit-Columns">
         <app-view-table class="cols" [dataSource]="units()" [cols]="cols" [editOrDeleteAcess]="editOrDeleteAcess" (editItem)="editUnit($event)"

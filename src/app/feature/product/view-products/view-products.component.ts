@@ -9,11 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ViewTableComponent } from '../../../shared/components/view-table/view-table.component';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { BarcodeInputComponent } from "../../../shared/components/barcode-input/barcode-input.component";
 
 @Component({
   selector: 'app-view-products',
   standalone: true,
-  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule, ViewTableComponent, AddProductComponent],
+  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule, ViewTableComponent, AddProductComponent, BarcodeInputComponent],
   templateUrl: './view-products.component.html',
   styleUrl: './view-products.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

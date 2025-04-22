@@ -10,6 +10,7 @@
           <mat-icon>add</mat-icon>
           ADD Subproduct
         </button>
+        <app-barcode-input class="ml-auto"></app-barcode-input>
       </div>
       <div class="subproduct-Columns">
         <app-view-table [dataSource]="subproducts()" [cols]="cols" class="cols" (editItem)="editSubproduct($event)"
@@ -18,6 +19,6 @@
     </div>
   }
   @else {
-  <app-add-sub-products [selectedSubproduct]="selectedSubproduct()" (reloadList)="reloadList()" (cancelAddOrUpdate)="cancelAddOrUpdate()" [productId]="productId" />
+    <app-add-sub-products [selectedSubproduct]="selectedSubproduct()" (reloadList)="reloadList()" (cancelAddOrUpdate)="cancelAddOrUpdate()" [productId]="productId" />
   }
 </div>

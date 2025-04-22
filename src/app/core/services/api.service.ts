@@ -117,6 +117,10 @@ export class ApiService {
     return this.http.delete<string>(`${this.apiUrl}/sub-products/${id}`, { responseType: "text" as 'json' });
   }
 
+  getDetailsByBarcode(barcode: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/barcodes/getSubProductByBarcode?barcode=${barcode}`);
+  }
+
   getBarcodeImage(barcodeString: string): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/barcodes/${barcodeString}`, { responseType: 'blob' });
   }

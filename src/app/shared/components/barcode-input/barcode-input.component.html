@@ -1,0 +1,10 @@
+<div class="barcode-input-container">
+  <mat-form-field>
+    <mat-label>Scan Barcode</mat-label>
+    <input matInput #barcodeInput (keydown.enter)="onBarcodeScanned(barcodeInput.value)" placeholder="Scan barcode here">
+    <mat-icon matSuffix>qr_code_scanner</mat-icon>
+  </mat-form-field>
+  <button class="addButton" mat-flat-button disableRipple="true" color="primary" (click)="onBarcodeScanned(barcodeInput.value)">
+    <mat-icon>subdirectory_arrow_right</mat-icon>
+  </button>
+</div>

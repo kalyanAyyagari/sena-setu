@@ -10,6 +10,7 @@
           <mat-icon>add</mat-icon>
           ADD Product
         </button>
+        <app-barcode-input class="ml-auto"></app-barcode-input>
       </div>
       <div class="product-Columns">
         <app-view-table [dataSource]="products()" [cols]="cols" class="cols" (editItem)="editProduct($event)"

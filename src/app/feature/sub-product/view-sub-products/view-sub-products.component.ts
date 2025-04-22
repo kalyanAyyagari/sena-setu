@@ -1,19 +1,20 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ApiService } from '../../../core/services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subproduct } from '../../../core/models/helperModals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ViewTableComponent } from '../../../shared/components/view-table/view-table.component';
 import { AddSubProductsComponent } from '../add-sub-products/add-sub-products.component';
+import { BarcodeInputComponent } from "../../../shared/components/barcode-input/barcode-input.component";
 
 @Component({
   selector: 'app-view-sub-products',
   standalone: true,
-  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule, ViewTableComponent, AddSubProductsComponent],
+  imports: [MatButtonModule, MatInputModule, MatTableModule, MatIconModule, ViewTableComponent, AddSubProductsComponent, BarcodeInputComponent],
   templateUrl: './view-sub-products.component.html',
   styleUrl: './view-sub-products.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -36,14 +37,12 @@ export class ViewSubProductsComponent {
     private apiService: ApiService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.unitId = this.route.snapshot.paramMap.get('unitId') as string;
     this.companyId = this.route.snapshot.paramMap.get('companyId') as string;
     this.productId = this.route.snapshot.paramMap.get('productId') as string;
     this.getSubproductsByProductId(this.productId);
-  }
+   }
 
   getSubproductsByProductId(productId: string) {
     this.subproducts.set(new MatTableDataSource());
@@ -105,10 +104,6 @@ export class ViewSubProductsComponent {
     this.selectedSubproduct.set(this.getEmptySubproductObject());
     this.addToggle.set(false);
   }
-
-  // goToSubSubproduct(subproductId: string) {
-  //   this.router.navigate([`/units/${this.unitId}/companies/${this.companyId}/products/${productId}/subproducts`]);
-  // }
 
   getEmptySubproductObject(): Subproduct {
     return {
