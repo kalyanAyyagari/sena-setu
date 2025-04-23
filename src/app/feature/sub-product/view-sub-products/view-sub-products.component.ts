@@ -40,15 +40,25 @@ export class ViewSubProductsComponent {
     private apiService: ApiService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
+    private router: Router
   ) {
     this.unitId = this.route.snapshot.paramMap.get('unitId') as string;
     this.companyId = this.route.snapshot.paramMap.get('companyId') as string;
     this.productId = this.route.snapshot.paramMap.get('productId') as string;
 
-    // Subscribe to query params to handle filtering
-    this.route.queryParams.subscribe(params => {
-      this.getSubproductsByProductId(this.productId, params['filter']);
-    });
+    // Get initial filter from query params and then remove it
+    const filterParam = this.route.snapshot.queryParams['filter'];
+    if (filterParam) {
+      this.getSubproductsByProductId(this.productId, filterParam);
+      // Remove the filter from URL
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { filter: null },
+        queryParamsHandling: 'merge'
+      });
+    } else {
+      this.getSubproductsByProductId(this.productId);
+    }
   }
 
   getSubproductsByProductId(productId: string, filterValue?: string | undefined) {
