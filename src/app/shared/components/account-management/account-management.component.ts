@@ -13,6 +13,7 @@ import { ApiService } from '../../../core/services/api.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-management',
@@ -45,7 +46,7 @@ export class AccountManagementComponent {
 
   isAdmin = computed(() => this.currentUser()?.role === 'ADMIN');
 
-  constructor() {
+  constructor(private router: Router) {
     this.loadCurrentUser();
     this.loadUsers();
     this.loadLogs();
@@ -217,6 +218,7 @@ export class AccountManagementComponent {
         next: () => {
           if (self) {
             this.authService.logout();
+            this.router.navigate(['/login']);
             return;
           }
           this.loadUsers();
