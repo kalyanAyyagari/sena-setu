@@ -79,7 +79,7 @@ export class ViewUnitsComponent {
     this.getAllUnits();
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.units().filter = filterValue.trim().toLowerCase();
   }

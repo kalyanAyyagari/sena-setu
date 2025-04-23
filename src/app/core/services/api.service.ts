@@ -21,6 +21,8 @@ export class ApiService {
     return false;
   }
 
+
+
   // Unit CRUD operations
   getAllUnits(): Observable<Unit[]> {
     return this.http.get<Unit[]>(`${this.apiUrl}/units/getAll`);
@@ -144,6 +146,10 @@ export class ApiService {
 
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/users/delete/${id}`, { responseType: "text" as 'json' });
+  }
+
+  changePassword(userId: number, oldPassword: string, newPassword: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/users/change-password?userId=${userId}&oldPassword=${oldPassword}&newPassword=${newPassword}`, null);
   }
 
   getLogs(pageNumber: number): Observable<any> {

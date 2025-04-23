@@ -93,7 +93,7 @@ export class ViewCompaniesComponent {
     this.getCompaniesByUnitId(this.unitId);
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.companies().filter = filterValue.trim().toLowerCase();
   }

@@ -1,5 +1,5 @@
 <div class="dialog-content">
-  <h2 mat-dialog-title>Row Details</h2>
+  <h2 mat-dialog-title class="title" >Details</h2>
   <div mat-dialog-content>
     <p><strong>Name:</strong> {{ data.name }}</p>
     @if (data.description) {
@@ -25,7 +25,7 @@
     </div>
     }
     <div mat-dialog-actions style="margin-top: 3rem;">
-      <button mat-button color="primary" (click)="closeDialog()">Close</button>
+      <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
     </div>
   </div>
 </div>

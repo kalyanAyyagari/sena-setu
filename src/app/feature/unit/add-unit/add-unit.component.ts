@@ -47,7 +47,13 @@ export class AddUnitComponent {
 
   onAdd(): void {
     if (this.addUnitForm.invalid) return;
-    this.apiService.createUnit(this.addUnitForm.value).subscribe({
+    const formValues = this.addUnitForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description // don't trim description
+    };
+    this.apiService.createUnit(trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open("Unit created successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
@@ -61,7 +67,13 @@ export class AddUnitComponent {
 
   onEdit(): void {
     if (this.addUnitForm.invalid) return;
-    this.apiService.updateUnit(this.selectedUnit()?.id, this.addUnitForm.value).subscribe({
+    const formValues = this.addUnitForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description // don't trim description
+    };
+    this.apiService.updateUnit(this.selectedUnit()?.id, trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open("Unit updated successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();

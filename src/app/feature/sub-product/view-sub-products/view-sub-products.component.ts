@@ -106,7 +106,7 @@ export class ViewSubProductsComponent {
     this.getSubproductsByProductId(this.productId);
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.subproducts().filter = filterValue.trim().toLowerCase();
   }

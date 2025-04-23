@@ -95,7 +95,7 @@ export class ViewProductsComponent {
     this.getProductsByCompanyId(this.companyId);
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.products().filter = filterValue.trim().toLowerCase();
   }

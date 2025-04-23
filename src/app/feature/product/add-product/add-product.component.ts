@@ -48,7 +48,13 @@ export class AddProductComponent {
 
   onAdd(): void {
     if (this.addProductForm.invalid) return;
-    this.apiService.createProduct(this.companyId(), this.addProductForm.value).subscribe({
+    const formValues = this.addProductForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description // don't trim description
+    };
+    this.apiService.createProduct(this.companyId(), trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open("Added successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
@@ -62,7 +68,13 @@ export class AddProductComponent {
 
   onEdit(): void {
     if (this.addProductForm.invalid) return;
-    this.apiService.updateProduct(this.companyId(), this.selectedProduct()?.id, this.addProductForm.value).subscribe({
+    const formValues = this.addProductForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description // don't trim description
+    };
+    this.apiService.updateProduct(this.companyId(), this.selectedProduct()?.id, trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open("updated successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();

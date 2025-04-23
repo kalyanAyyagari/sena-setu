@@ -2,8 +2,18 @@
   .dialog-content {
     .mat-mdc-dialog-content {
       word-wrap: break-word;
+      color: #37440a;
+      background-color: #ebeedd;
     }
   }
+}
+
+.title{
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+  background-color: #4b5320;
+  margin: 0;
 }
 
 .print-options {

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,9 +18,9 @@ import { MatPaginator } from '@angular/material/paginator';
   selector: 'app-account-management',
   standalone: true,
   imports: [
-    CommonModule, MatTableModule, MatInputModule, MatButtonModule,
+    MatTableModule, MatInputModule, MatButtonModule,
     MatIconModule, ReactiveFormsModule, MatFormFieldModule, MatCardModule,
-    MatSnackBarModule, MatTabsModule, MatPaginator
+    MatSnackBarModule, MatTabsModule, MatPaginator, DatePipe
   ],
   templateUrl: './account-management.component.html',
   styleUrl: './account-management.component.scss',
@@ -131,6 +131,7 @@ export class AccountManagementComponent {
         company: user.company,
         rank: user.rank
       });
+      this.editUserForm.get('armyNumber')?.disable();
       this.editMode.set('Edit');
     }
   }
@@ -143,9 +144,19 @@ export class AccountManagementComponent {
   saveUserEdit(): void {
     if (this.editUserForm.invalid) return;
 
+    const formValues = this.editUserForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      firstName: formValues.firstName?.trim(),
+      lastName: formValues.lastName?.trim(),
+      company: formValues.company?.trim(),
+      rank: formValues.rank?.trim(),
+    };
+
     const user = this.currentUser();
     if (user) {
-      this.apiService.updateUser(user.id, this.editUserForm.value).subscribe({
+      this.apiService.updateUser(user.id, trimmedValues).subscribe({
         next: (updatedUser) => {
           this.currentUser.set(updatedUser);
           this.editMode.set('None');
@@ -172,10 +183,20 @@ export class AccountManagementComponent {
   savePasswordEdit(): void {
     if (this.changePasswordForm.invalid) return;
 
-    // Placeholder for API call - will be implemented later
-    console.log('Password change form submitted:', this.changePasswordForm.value);
-    this.editMode.set('None');
-    this.changePasswordForm.reset();
+    const user = this.currentUser();
+    if (!user) return;
+
+    const { oldPassword, newPassword } = this.changePasswordForm.value;
+    this.apiService.changePassword(user.id, oldPassword, newPassword).subscribe({
+      next: () => {
+        this.editMode.set('None');
+        this.changePasswordForm.reset();
+        this.showSuccess('Password updated successfully');
+      },
+      error: (error) => {
+        this.showError(error?.error?.message ?? 'An error occurred while updating password');
+      }
+    });
   }
 
   makeAdmin(user: User): void {

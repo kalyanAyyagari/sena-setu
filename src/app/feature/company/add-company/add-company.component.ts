@@ -48,7 +48,13 @@ export class AddCompanyComponent {
 
   onAdd(): void {
     if (this.addCompanyForm.invalid) return;
-    this.apiService.createCompany(this.unitId(), this.addCompanyForm.value).subscribe({
+    const formValues = this.addCompanyForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description // don't trim description
+    };
+    this.apiService.createCompany(this.unitId(), trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open("Added successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
@@ -62,7 +68,13 @@ export class AddCompanyComponent {
 
   onEdit(): void {
     if (this.addCompanyForm.invalid) return;
-    this.apiService.updateCompany(this.unitId(), this.selectedCompany()?.id, this.addCompanyForm.value).subscribe({
+    const formValues = this.addCompanyForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description // don't trim description
+    };
+    this.apiService.updateCompany(this.unitId(), this.selectedCompany()?.id, trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open("updated successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();

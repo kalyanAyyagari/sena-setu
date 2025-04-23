@@ -52,7 +52,7 @@ export class GlobalSearchComponent {
   }
 
   onSearchInput(text: string) {
-    this.searchText$.next(text);
+    this.searchText$.next(text.trim());
   }
 
   clearSearch() {

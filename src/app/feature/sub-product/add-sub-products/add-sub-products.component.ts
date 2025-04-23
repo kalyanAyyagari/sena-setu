@@ -50,7 +50,14 @@ export class AddSubProductsComponent {
 
   onAdd(): void {
     if (this.addSubproductForm.invalid) return;
-    this.apiService.createSubproduct(this.productId(), this.addSubproductForm.value).subscribe({
+    const formValues = this.addSubproductForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description, // don't trim description
+      quantity: formValues.quantity // don't trim quantity as it's a number
+    };
+    this.apiService.createSubproduct(this.productId(), trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open("Added successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();
@@ -65,11 +72,18 @@ export class AddSubProductsComponent {
   onEdit(): void {
     let isQuantityOnlyUpdate = false;
     if (this.addSubproductForm.invalid) return;
-    if(this.selectedSubproduct()?.name===this.addSubproductForm.value.name &&
-    this.selectedSubproduct()?.quantity!==this.addSubproductForm.value.quantity) {
+    const formValues = this.addSubproductForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      description: formValues.description, // don't trim description
+      quantity: formValues.quantity // don't trim quantity as it's a number
+    };
+    if(this.selectedSubproduct()?.name===trimmedValues.name &&
+    this.selectedSubproduct()?.quantity!==trimmedValues.quantity) {
       isQuantityOnlyUpdate = true;
     };
-    this.apiService.updateSubproduct(this.productId(), this.selectedSubproduct()?.id, this.addSubproductForm.value, isQuantityOnlyUpdate).subscribe({
+    this.apiService.updateSubproduct(this.productId(), this.selectedSubproduct()?.id, trimmedValues, isQuantityOnlyUpdate).subscribe({
       next: (response) => {
         this.snackBar.open("updated successfully", 'Close', { duration: 5000, panelClass: 'success-snackbar' });
         this.reloadList.emit();

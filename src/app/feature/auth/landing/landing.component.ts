@@ -54,10 +54,28 @@ export class LandingComponent {
     });
   }
 
+  onArmyNumberInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const upperValue = input.value.toUpperCase();
+    this.signupForm.get('armyNumber')?.setValue(upperValue, { emitEvent: false });
+  }
+
   onSignupSubmit(): void {
     if (this.signupForm.invalid) return;
 
-    this.authService.signup(this.signupForm.value).subscribe({
+    const formValues = this.signupForm.value;
+    const trimmedValues = {
+      ...formValues,
+      name: formValues.name?.trim(),
+      firstName: formValues.firstName?.trim(),
+      lastName: formValues.lastName?.trim(),
+      company: formValues.company?.trim(),
+      rank: formValues.rank?.trim(),
+      armyNumber: formValues.armyNumber?.trim(),
+      password: formValues.password // don't trim password
+    };
+
+    this.authService.signup(trimmedValues).subscribe({
       next: (response) => {
         this.snackBar.open('Account created successfully!', 'Close', { duration: 3000, panelClass: 'success-snackbar' });
         this.selectedTabIndex.set(0);
@@ -72,7 +90,13 @@ export class LandingComponent {
   onLoginSubmit(): void {
     if (this.loginForm.invalid) return;
 
-    this.authService.login(this.loginForm.value).subscribe({
+    const formValues = this.loginForm.value;
+    const trimmedValues = {
+      name: formValues.name?.trim(),
+      password: formValues.password // don't trim password
+    };
+
+    this.authService.login(trimmedValues).subscribe({
       next: (response) => {
         this.authService.setToken(response.token);
         this.authService.setUser(response);
